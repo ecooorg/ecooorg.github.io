@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verified Intent Execution (VIX)</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+        }
+        h1, h2, h3 {
+            color: #111;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.3em;
+        }
+        h1 { font-size: 2em; margin-bottom: 0.2em; }
+        h2 { font-size: 1.5em; margin-top: 1.5em; }
+        h3 { font-size: 1.2em; margin-top: 1.2em; }
+        .meta {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+        .footer-note {
+            font-size: 0.85em;
+            color: #777;
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>VERIFIED INTENT EXECUTION</h1>
+    <p><strong>Governed autonomous synthesis and formal verification of computational systems from business goals</strong></p>
+    <p class="meta">22 October 2026 — Volodymyr Kotegov — CC BY 4.0</p>
+
+    <h2>Status and Purpose of This Document</h2>
+    <p>This document is a preprint of the Verified Intent Execution (VIX) architectural specification. It consolidates the original conceptual vision with progressive refinements of architecture, authority boundaries and engineering methods. The present edition incorporates concrete techniques for bridging natural-language intent to formal models, a minimal but operational contract for state and hot reconfiguration, safeguards against silent drift of success criteria, and a clearer differentiation strategy for early demonstration domains.</p>
+    <p>The human role remains that of navigator and arbiter of business meaning, risk appetite and policy boundaries. The system assumes responsibility for exploring implementations, generating and verifying candidates, synthesising executable structures, monitoring behaviour and safely evolving the running environment within approved constraints. All automation is scoped to capabilities realistically attainable within a three-to-five-year horizon. The target architecture is not simplified for the sake of the first prototype; successive stages realise the same concept at increasing levels of completeness.</p>
+
+    <h2>1. Concept of VIX</h2>
+    <p>VIX is an autonomous system for the synthesis, formal verification, execution and controlled evolution of computational systems. It transforms high-level business goals into verifiable behavioural models and executable Dataflow structures, independently explores alternative algorithms and architectures, enforces mandatory invariants, and can propose alternative interpretations of goals without activating them unless authorised.</p>
+    <p>VIX manages the full life-cycle of a computational realisation: interpretation of business intent, synthesis of candidates, verification, execution, observation of behaviour, and safe modification of the running system. The human does not write implementation code, does not manually enter mathematical formulae, and is not required to understand internal formal proofs. The human navigates intent, reviews material consequences through the Intent Review interface, and decides on policy changes that exceed the pre-authorised envelope.</p>
+
+    <h2>2. Core Principle of Autonomy</h2>
+    <p>VIX possesses design autonomy: the system itself explores possible realisations, generates hypotheses, selects architectures, synthesises graphs, searches for alternative algorithms and optimises execution. The human is relieved of routine development and operational labour. The human’s essential contribution is the definition and periodic refinement of business goals, the acceptance or rejection of material consequences presented through Intent Review, and the authorisation of policy-level changes.</p>
+    <p>Design autonomy is not an unrestricted right to alter business policy. Within the envelope of mandatory invariants and approved rules the system may freely choose implementation strategies. It may also surface a new interpretation of a goal together with supporting evidence and consequence analysis; such a proposal becomes active only after the prescribed human authorisation.</p>
+
+    <h2>3. Normative Core and Autonomous Design Contour</h2>
+    
+    <h3>3.1 Normative Core</h3>
+    <p>The normative core stores the currently agreed business goals and their active interpretation, the mandatory business invariants, safety and action constraints, the approved change rules, the conflict-resolution hierarchy, and the conditions under which human authorisation is required. It is updated only through a controlled version-approval procedure.</p>
+    <p>The autonomous contour has no authority to declare a mandatory constraint optional or to substitute its own interpretation for an agreed goal.</p>
+    <p><strong>Conflict-resolution hierarchy:</strong></p>
+    <ol>
+        <li>Safety (prevention of unacceptable states)</li>
+        <li>Mandatory business invariant</li>
+        <li>Law, regulation and contractual obligation</li>
+        <li>Approved organisational policy</li>
+        <li>Business goal</li>
+        <li>Efficiency and secondary optimisation criteria</li>
+    </ol>
+    <p>Success criteria and approved KPIs are versioned and immutable within a given version of the normative core. Any change to them constitutes a Level-5 proposal and requires explicit navigator authorisation. The system has no authority to adjust thresholds or reinterpret criteria on the basis of operational telemetry alone.</p>
+
+    <h3>3.2 Autonomous Design and Evolution Contour</h3>
+    <p>This contour generates alternative algorithms and Dataflow graphs, redistributes resources, alters computational topology, evaluates other ways of achieving a business goal, analyses execution results and formulates proposals for changing the interpretation of the goal itself. All activities remain subordinate to the normative core. Operational metrics (latency, cost, error rate) may be optimised inside approved corridors; criteria of success may not.</p>
+
+    <h2>4. Five Levels of Autonomous Change</h2>
+    <p>The following levels define the scope of actions the system may take without further human authorisation, provided mandatory invariants and safety constraints remain satisfied.</p>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Level</th>
+                <th>Authority and Condition</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>1. Resource reallocation</strong></td>
+                <td>Permitted autonomously for CPU, memory, parallelism and queues within a node, and for inter-node placement and cloud budget within explicit policy limits.</td>
+            </tr>
+            <tr>
+                <td><strong>2. Dataflow topology change</strong></td>
+                <td>Permitted autonomously when semantics are preserved within the established model and premises, and all mandatory invariants remain satisfied. Full observational equivalence for every possible input is not required.</td>
+            </tr>
+            <tr>
+                <td><strong>3. Algorithm change</strong></td>
+                <td>Permitted after independent verification (formal or test-based). Automatic admission is allowed only against pre-defined acceptance criteria.</td>
+            </tr>
+            <tr>
+                <td><strong>4. Change of goal-achievement strategy</strong></td>
+                <td>Permitted only within an explicit compromise policy. Automatic degradation of any approved KPI beyond stated thresholds is forbidden.</td>
+            </tr>
+            <tr>
+                <td><strong>5. Proposal of a new goal interpretation</strong></td>
+                <td>Permitted only as a proposal. Activation requires prescribed human authorisation. The proposal must include alternative formulation, rationale, counter-examples, scenario comparison and candidate invariants.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <p>Before any autonomous adaptation the system produces an explicit intent diff: what is being changed, which operational metric triggered the change, and confirmation that approved success criteria remain untouched. If a success criterion would be affected, the change is reclassified as a Level-5 proposal.</p>
+
+    <h2>5. Architectural Blocks</h2>
+    <p><strong>Block 100 — Hybrid Semantic Specifier</strong><br>
+    Accepts business goals, constraints and descriptions of expected behaviour. Primary inputs for the first version are natural-language text, structured forms and examples of inputs and outputs.<br>
+    The block produces a structured Intent Intermediate Representation that separates goals, constraints, assumptions, exceptions, temporal bounds, roles and data objects. Detected ambiguities must not silently become mandatory business rules.<br>
+    Ambiguity handling: high-risk or irreversible ambiguities are always escalated to the human navigator; low-risk ambiguities may be resolved according to approved policy with explicit notification. The system batches questions where possible and interrupts the navigator only when material risk or irreversibility is present.</p>
+
+    <p><strong>Block 120 — Autonomous Generation of State Models and Invariants</strong><br>
+    Autonomously constructs the space of relevant states, candidate invariants and formal behavioural models. The human is not required to enter formulae. Generated rules are classified by origin and status: consequences of stated requirements, technical constraints, assumptions about the external environment, proposed business rules, and constraints not yet authorised.</p>
+    <p><em>Formalisation pipeline.</em> Translation from Intent IR to formal candidates employs a combination of complementary techniques:</p>
+    <ul>
+        <li>Structured decomposition of intent into typed elements (goals, constraints, assumptions, exceptions, roles, data objects).</li>
+        <li>Retrieval over a curated catalogue of common business invariant patterns (account-balance conservation, operation idempotence, monotonic status progression, resource non-negativity, and similar), followed by specialisation of the nearest patterns to the current Intent IR.</li>
+        <li>Contrastive refinement: the system searches for simple counter-examples (including via SMT) and presents them in Intent Review as concrete scenarios (“under these inputs the system would do X — is that intended?”).</li>
+        <li>Dual generation: two independent passes produce candidate formalisations; divergences are automatically elevated as ambiguities requiring resolution.</li>
+        <li>Mandatory provenance: every predicate carries a machine-readable link to the source fragment of the original requirement or to the navigator decision that authorised it.</li>
+    </ul>
+    <p>Each formal model receives a confidence grade (high / medium / low) derived from pattern coverage, number of manual clarifications required, and results of counter-example search. Production launch is permitted only for high-confidence models that have also received navigator authorisation. Authorisation of mandatory status remains a human responsibility for all business invariants; technical constraints may be accepted under policy.</p>
+
+    <p><strong>Block 150 — Intent Review: Consequence Exploration and Authorisation</strong><br>
+    Intent Review is the human-facing interface for exploring scenarios and consequences. It presents understandable examples of behaviour, edge cases, trade-offs and potential risks without requiring knowledge of formal methods. Counter-examples generated during formalisation become a primary medium of dialogue: short, concrete scenarios replace lengthy specification reviews. The interface combines simulation, systematic state-space exploration and counter-example search. Mass simulations help to surface problems; they do not replace formal proof.<br>
+    Before authorisation the navigator sees a concise summary and material risks on the primary surface, with progressive disclosure of normal and edge-case scenarios, differences between candidates, residual uncertainties and links to formal results. The preferred explanation format is a short decision-oriented summary with the ability to drill down.</p>
+
+    <p><strong>Block 200 — Gradient Formal Verification</strong><br>
+    Combines classical SAT/SMT solvers with interactive proof assistants according to the class of property and required rigour. Critical properties demand strict justification within a stated model and set of premises. For non-critical properties weaker guarantees, runtime assertions and statistical arguments may be used.<br>
+    Verification outcomes distinguish at least PROVED, REFUTED and UNKNOWN. For every result the model, premises, domain of applicability and supporting artefacts are recorded. For critical properties an UNKNOWN result blocks production launch or confines execution to an isolated test mode without real-world side-effects. When a critical invariant cannot be discharged within a bounded computational budget the system returns to Intent Review for reformulation rather than proceeding with an unverified core. For the first prototype, proof of the model together with independent conformance tests of the realisation is treated as sufficient; a fully machine-checked link from model to executable code remains a progressive target.</p>
+
+    <p><strong>Block 300 — JIT Dataflow Compiler</strong><br>
+    Treats the Dataflow graph as the primary representation of computation and SSA form as an internal intermediate representation supporting analysis and optimisation. The architecture distinguishes the semantic graph that captures business meaning, the executable Dataflow graph, and the mapping of that graph onto a target platform. The primary synthesis object for the first version is an executable Dataflow graph together with its state model. Hand-written code is limited to infrastructure, adapters and verified primitives; application business logic is synthesised. Traditional languages and operating systems may be used in early infrastructure. Direct ISA mapping remains a progressive optimisation to be evaluated after an intermediate compiler path is established.</p>
+
+    <p><strong>Block 400 — Controlled Runtime, Isolation and Adaptation</strong><br>
+    Executes verified graphs, collects telemetry, detects deviations and supports controlled adaptation. A conventional operating system is acceptable provided critical operations place it outside the trusted computing base; full bare-metal execution and direct ISA mapping remain long-term hypotheses rather than first-prototype requirements.<br>
+    Telemetry is classified into functional anomalies, operational degradation and suspected security violations. Each class triggers a distinct response drawn from a reaction matrix: Safety violations produce immediate stop or isolation of the affected component; business-correctness violations produce safe degraded mode or rollback; performance deviations produce notification and attempted adaptation within approved corridors. Emergency authority is limited to stop and isolate actions; the system may not autonomously alter goals or mandatory invariants.<br>
+    Irreversible external side-effects (payments, order despatch, equipment commands) require a special protocol. Such changes are forbidden without an explicit transactional or compensating mechanism and may additionally require human confirmation according to policy.</p>
+
+    <h2>6. Autonomous Evolution Cycle</h2>
+    <p>The system operates a continuous closed loop:</p>
+    <ol>
+        <li><strong>Observe</strong> — collection of state, load, latency, errors and execution outcomes.</li>
+        <li><strong>Diagnose</strong> — determination of probable cause (resources, topology, algorithm, or external change).</li>
+        <li><strong>Hypothesize</strong> — generation of alternative realisations or of a proposal for a new goal interpretation.</li>
+        <li><strong>Synthesize</strong> — construction of candidate graphs, algorithms, configurations and placements.</li>
+        <li><strong>Verify</strong> — checking of invariants, safety constraints and other properties with explicit recording of premises.</li>
+        <li><strong>Evaluate</strong> — comparison of performance, cost, latency, resilience and business consequences against immutable success criteria.</li>
+        <li><strong>Authorize</strong> — determination whether the change may be applied automatically or requires human authorisation; production of an intent diff.</li>
+        <li><strong>Deploy</strong> — activation of the prepared version under controlled conditions.</li>
+        <li><strong>Monitor and recover</strong> — observation of the new version and rollback if acceptance criteria are violated.</li>
+    </ol>
+    <p>Periodic audit reports summarise autonomous changes made during an interval and confirm that no approved success criterion was altered. Any apparent drift is treated as a policy violation and made visible to the navigator.</p>
+
+    <h2>7. Safe Update of a Running System</h2>
+    <p>Graph or algorithm updates follow a parallel-version model. The current version G1 continues to run while the new version G2 is synthesised and verified offline.</p>
+    <p><strong>State model.</strong> State is partitioned into explicit categories:</p>
+    <ul>
+        <li>Computational state — values of graph nodes that can be recomputed.</li>
+        <li>Queues and in-flight events — must either survive reconfiguration or be explicitly drained before switch-over.</li>
+        <li>External side-effects — payments, writes to external systems, equipment commands; marked irreversible and handled only through compensating actions or two-phase protocols.</li>
+        <li>Checkpoints — explicitly declared points at which state is known to be consistent.</li>
+    </ul>
+    <p><strong>Switch-over protocol:</strong></p>
+    <ol>
+        <li>G2 is synthesised and verified offline.</li>
+        <li>G2 is started in shadow mode, receiving the same inputs as G1 but producing no external effects.</li>
+        <li>Outputs are compared against approved invariants and key metrics for a defined observation window.</li>
+        <li>On success, an atomic switch occurs at the next consistent checkpoint, or traffic is shifted gradually if the graph permits.</li>
+        <li>On any violation, immediate rollback is performed and the event is recorded in the change history.</li>
+    </ol>
+    <p>Every synthesised graph must declare which categories of state it regards as compatible for hot-swap. Graphs that cannot make this declaration are restricted to cold restart with explicit loss of in-flight events; the restriction is reported to the navigator. Automatic rollback is triggered by invariant violation, breach of latency or error thresholds, divergence between G1 and G2, or integrity/security check failure, each with class-specific thresholds.</p>
+
+    <h2>8. Verifiable Change History</h2>
+    <p>Every version maintains a verifiable chain linking original intent, active constraints, executable realisation and operational results. For each modification the following artefacts are retained:</p>
+    <ul>
+        <li>business goal and version of its interpretation;</li>
+        <li>mandatory invariants, constraints and assumptions, each with provenance;</li>
+        <li>original and new graphs, algorithms or configurations;</li>
+        <li>reason for the change, expected effect, and the intent diff;</li>
+        <li>results of formal verification and the model employed;</li>
+        <li>consequence evaluation and basis for automatic permission or human authorisation;</li>
+        <li>execution results after switch-over;</li>
+        <li>information required to restore the previous operational version.</li>
+    </ul>
+
+    <h2>9. Boundaries of Guarantees</h2>
+    <p>Formal verification applies to a concrete model, a set of premises and a domain of applicability. It does not automatically prove that the formalisation fully captures a natural-language business goal. VIX therefore explicitly distinguishes formally verifiable properties, assumptions about the external environment, and business meanings that could not be completely formalised. External systems are treated as an untrusted environment: inputs are validated and environmental assumptions are both formalised and monitored.</p>
+    <p>Insufficient formalisability is handled by criticality: for critical goals the system refuses to launch a candidate and explains the gap; for non-critical goals it may offer alternative models under strengthened monitoring.</p>
+    <p>Simulation, monitoring, hardware isolation and formal verification address different concerns and do not substitute for one another. The concrete level of assurance is stated for each property and each system version.</p>
+
+    <h2>10. Development Stages</h2>
+    <p>The target architecture is not simplified for the sake of the first prototype. Stages are progressive realisations of the same concept. The first stage concentrates on proving the value of formalisation and contradiction discovery rather than on autonomous evolution; the latter remains part of the target and is introduced once the formalisation path is shown to be reliable.</p>
+    <p><strong>Stage I — Validation of Formalisation and Core Synthesis</strong><br>
+    Implement the formalisation pipeline (structured decomposition, pattern catalogue, contrastive refinement, dual generation, provenance), the Intent Review interface driven by counter-examples, formal verification of at least one critical property, and synthesis plus execution of a Dataflow graph with its state model on an existing platform. Preferred demonstration domains are data-flow / ETL / system integration and transactional business processes — domains in which integrity invariants and status machines are naturally expressible and in which existing platforms rarely provide formal guarantees or automatic contradiction discovery.<br>
+    Principal success metrics: time from requirement to running prototype, fraction of requirements formalised without intervention, number of contradictions and counter-examples discovered before execution, fraction of critical properties successfully checked, and navigability of Intent Review. The first proof points are, in order: production of a working graph from a textual goal without hand-written business logic; discovery of contradictions or gaps before launch; and proof of at least one critical invariant for a concrete model.</p>
+    <p><strong>Stage II — Resilience and Safe Adaptation</strong><br>
+    Add version management, the full state and switch-over contract, shadow-mode comparison, irreversible-side-effect protocols, telemetry classification, reaction matrices, intent diffs, periodic audit reports, and controlled autonomous evolution within the five-level authority model.</p>
+    <p><strong>Stage III — Hardware-Oriented Platform</strong><br>
+    Progressively strengthen hardware isolation, evaluate direct ISA mapping after an intermediate compiler path is mature, and introduce specialised accelerators or bare-metal execution paths where they yield measurable advantage. Continuous telemetry-driven adaptation becomes operational as the platform permits.</p>
+
+    <h2>11. Differentiation in Early Domains</h2>
+    <p>Existing workflow and integration platforms excel at execution. VIX differentiates on three capabilities that those platforms typically lack:</p>
+    <ul>
+        <li><strong>Formal contract instead of hope.</strong> The system does not merely construct a pipeline; it produces formal integrity invariants, attempts to prove them, and surfaces contradictions or gaps before any execution occurs.</li>
+        <li><strong>Counter-example as the primary language of business dialogue.</strong> Short, concrete scenarios replace lengthy specification reviews, reducing the cost of clarification and raising the quality of requirements.</li>
+        <li><strong>Guaranteed evolution with history.</strong> When business rules change, the system shows the formal diff, proves preservation or explicit alteration of critical invariants, performs a controlled switch with rollback capability, and retains full traceability from business decision to graph modification.</li>
+    </ul>
+
+    <h2>12. Summary of Agreed Decisions</h2>
+    <ul>
+        <li>Project goal: autonomous synthesis and evolution of a computational system from business goals and invariants, with the human acting as navigator rather than developer.</li>
+        <li>Conflict hierarchy: safety &rarr; mandatory invariant &rarr; law/regulation &rarr; approved policy &rarr; business goal &rarr; efficiency.</li>
+        <li>Human affirms all business invariants; technical constraints may be accepted under policy. Provenance is recorded for every rule and every change.</li>
+        <li>Formalisation employs structured decomposition, pattern-catalogue retrieval, contrastive counter-example refinement, dual generation and mandatory provenance. Models receive a confidence grade; production launch requires high confidence plus navigator authorisation.</li>
+        <li>Success criteria are immutable within a version; any change is a Level-5 proposal. Intent diffs and periodic audits prevent silent drift.</li>
+        <li>UNKNOWN on a critical property blocks production launch. Emergency authority is limited to stop and isolate.</li>
+        <li>State is partitioned into computational state, queues, irreversible side-effects and checkpoints. Hot-swap follows a shadow-comparison protocol; graphs must declare compatibility.</li>
+        <li>Stage I prioritises formalisation quality and contradiction discovery; autonomous evolution is introduced in Stage II without reduction of the target architecture.</li>
+        <li>Early differentiation rests on formal contracts, counter-example dialogue and guaranteed evolution with history.</li>
+        <li>A conventional OS is acceptable outside the trusted computing base for critical operations; bare-metal and direct ISA mapping remain progressive targets.</li>
+    </ul>
+
+    <h2>13. Open Questions for Subsequent Iteration</h2>
+    <p>The following items remain deliberately unresolved and require dedicated architectural discussion or prototype experience:</p>
+    <ul>
+        <li>precise internal object contracts and schema of VIX artefacts;</li>
+        <li>detailed quality metrics and acceptance thresholds for the formalisation pipeline;</li>
+        <li>full classification of invariants by criticality and admissible verification methods;</li>
+        <li>concrete state-compatibility declarations for representative graph families;</li>
+        <li>threat model, trust boundaries and concrete hardware-isolation architecture;</li>
+        <li>detailed admission matrix for non-critical UNKNOWN results;</li>
+        <li>quantitative success thresholds and concrete demonstration scenarios for Stage I.</li>
+    </ul>
+
+    <h2>References</h2>
+    <p><em>Formal Methods, Verification and Theorem Proving</em></p>
+    <ol>
+        <li>Barrett, C., Fontaine, P., & Tinelli, C. (2017). The SMT-LIB Standard: Version 2.6. Department of Computer Science, The University of Iowa.</li>
+        <li>de Moura, L., & Bjørner, N. (2008). Z3: An Efficient SMT Solver. In Tools and Algorithms for the Construction and Analysis of Systems (TACAS).</li>
+        <li>Barbosa, H., et al. (2022). cvc5: A Versatile and Industrial-Strength SMT Solver. In Tools and Algorithms for the Construction and Analysis of Systems (TACAS).</li>
+        <li>de Moura, L., Kong, S., Avigad, J., van Doorn, F., & von Raumer, J. (2015). The Lean Theorem Prover (System Description). In Automated Deduction – CADE-25.</li>
+        <li>Nipkow, T., Paulson, L. C., & Wenzel, M. (2002). Isabelle/HOL: A Proof Assistant for Higher-Order Logic. Springer.</li>
+        <li>Bertot, Y., & Castéran, P. (2004). Interactive Theorem Proving and Program Development: Coq’Art. Springer.</li>
+        <li>Clarke, E. M., Grumberg, O., & Peled, D. A. (1999). Model Checking. MIT Press.</li>
+        <li>Baier, C., & Katoen, J.-P. (2008). Principles of Model Checking. MIT Press.</li>
+    </ol>
+    
+    <p><em>Program Synthesis and Correct-by-Construction Systems</em></p>
+    <ol start="9">
+        <li>Gulwani, S., Polozov, O., & Singh, R. (2017). Program Synthesis. Foundations and Trends in Programming Languages, 4(1–2), 1–119.</li>
+        <li>Alur, R., et al. (2013). Syntax-Guided Synthesis. In Formal Methods in Computer-Aided Design (FMCAD).</li>
+        <li>Solar-Lezama, A. (2008). Program Synthesis by Sketching. PhD thesis, University of California, Berkeley.</li>
+        <li>Manna, Z., & Waldinger, R. (1980). A Deductive Approach to Program Synthesis. ACM Transactions on Programming Languages and Systems, 2(1), 90–121.</li>
+    </ol>
+
+    <p><em>Dataflow, SSA and Intermediate Representations</em></p>
+    <ol start="13">
+        <li>Cytron, R., Ferrante, J., Rosen, B. K., Wegman, M. N., & Zadeck, F. K. (1991). Efficiently Computing Static Single Assignment Form and the Control Dependence Graph. ACM Transactions on Programming Languages and Systems, 13(4), 451–490.</li>
+        <li>Appel, A. W. (1998). SSA is Functional Programming. ACM SIGPLAN Notices, 33(4), 17–20.</li>
+        <li>Johnston, W. M., Hanna, J. R. P., & Millar, R. J. (2004). Advances in Dataflow Programming Languages. ACM Computing Surveys, 36(1), 1–34.</li>
+        <li>Lee, E. A., & Parks, T. M. (1995). Dataflow Process Networks. Proceedings of the IEEE, 83(5), 773–801.</li>
+    </ol>
+
+    <p><em>Self-Adaptive, Autonomous and Runtime Systems</em></p>
+    <ol start="17">
+        <li>Kephart, J. O., & Chess, D. M. (2003). The Vision of Autonomic Computing. Computer, 36(1), 41–50.</li>
+        <li>Salehie, M., & Tahvildari, L. (2009). Self-Adaptive Software: Landscape and Research Challenges. ACM Transactions on Autonomous and Adaptive Systems, 4(2), 1–42.</li>
+        <li>Cheng, B. H. C., et al. (2009). Software Engineering for Self-Adaptive Systems: A Research Roadmap. In Software Engineering for Self-Adaptive Systems. Springer.</li>
+        <li>de Lemos, R., et al. (2013). Software Engineering for Self-Adaptive Systems: A Second Research Roadmap. In Software Engineering for Self-Adaptive Systems II. Springer.</li>
+    </ol>
+
+    <p><em>Runtime Verification and Monitoring</em></p>
+    <ol start="21">
+        <li>Leucker, M., & Schallhart, C. (2009). A Brief Account of Runtime Verification. Journal of Logic and Algebraic Programming, 78(5), 293–303.</li>
+        <li>Havelund, K., & Roşu, G. (2004). An Overview of the Runtime Verification Tool Java PathExplorer. Formal Methods in System Design, 24(2), 189–215.</li>
+        <li>Bartocci, E., et al. (2018). Specification-Based Monitoring of Cyber-Physical Systems: A Survey on Theory, Tools and Applications. In Lectures on Runtime Verification. Springer.</li>
+    </ol>
+
+    <p><em>Trusted Execution and Hardware Isolation</em></p>
+    <ol start="24">
+        <li>Costan, V., & Devadas, S. (2016). Intel SGX Explained. IACR Cryptology ePrint Archive.</li>
+        <li>ARM. (2021). ARM Confidential Compute Architecture. Technical white paper.</li>
+        <li>Sabt, M., Achemlal, M., & Bouabdallah, A. (2015). Trusted Execution Environment: What It Is, and What It Is Not. In IEEE Trustcom/BigDataSE/ISPA.</li>
+    </ol>
+
+    <p><em>Requirements Engineering, Intent and Human-in-the-Loop</em></p>
+    <ol start="27">
+        <li>van Lamsweerde, A. (2009). Requirements Engineering: From System Goals to UML Models to Software Specifications. Wiley.</li>
+        <li>Zave, P., & Jackson, M. (1997). Four Dark Corners of Requirements Engineering. ACM Transactions on Software Engineering and Methodology, 6(1), 1–30.</li>
+        <li>Amershi, S., et al. (2019). Guidelines for Human-AI Interaction. In Proceedings of the 2019 CHI Conference on Human Factors in Computing Systems.</li>
+        <li>Shneiderman, B. (2020). Human-Centered Artificial Intelligence: Reliable, Safe & Trustworthy. International Journal of Human–Computer Interaction, 36(6), 495–504.</li>
+    </ol>
+
+    <p><em>Business Process and Workflow Systems</em></p>
+    <ol start="31">
+        <li>van der Aalst, W. M. P. (2013). Business Process Management: A Comprehensive Survey. ISRN Software Engineering, 2013.</li>
+        <li>Weske, M. (2012). Business Process Management: Concepts, Languages, Architectures (2nd ed.). Springer.</li>
+        <li>Russell, N., van der Aalst, W. M. P., & ter Hofstede, A. H. M. (2016). Workflow Patterns: The Definitive Guide. MIT Press.</li>
+    </ol>
+
+    <p><em>Related Architectural and Systems Ideas</em></p>
+    <ol start="34">
+        <li>Lamport, L. (2002). Specifying Systems: The TLA+ Language and Tools for Hardware and Software Engineers. Addison-Wesley.</li>
+        <li>Abrial, J.-R. (2010). Modeling in Event-B: System and Software Engineering. Cambridge University Press.</li>
+        <li>Sutter, H., & Larus, J. (2005). Software and the Concurrency Revolution. ACM Queue, 3(7), 54–62.</li>
+    </ol>
+
+    <p class="footer-note">This document is released under the Creative Commons Attribution 4.0 International Licence.</p>
+
+</body>
+</html>
