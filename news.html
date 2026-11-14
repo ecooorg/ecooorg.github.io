@@ -15,6 +15,8 @@
     background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.4;
   }
   .container { max-width: 1000px; margin: 0 auto; padding: 14px; }
+  .back { display: inline-block; margin: 10px 0 2px; color: var(--muted); font-size: .85rem; text-decoration: none; }
+  .back:hover { color: var(--accent); }
   header {
     position: sticky; top: 0; z-index: 3; background: var(--bg);
     padding: 8px 0 10px; margin-bottom: 8px; border-bottom: 1px solid var(--border);
@@ -85,16 +87,17 @@
 </head>
 <body>
 <div class="container">
+  <a class="back" href="index.html">&larr; ECO NGO</a>
   <header id="hdr">
     <div class="tabs" id="tabs"></div>
   </header>
 
-  <input type="search" id="search" placeholder="Search all topics (English words) last 7 days">
+  <input type="search" id="search" placeholder="Search all topics (English words), last 7 days">
   <div class="progress"><div id="bar"></div></div>
   <div class="searchinfo" id="searchinfo"></div>
 
   <div id="list"></div>
-  <div class="status" id="status">Loading feeds </div>
+  <div class="status" id="status">Loading feeds...</div>
   <div class="sources" id="sources"></div>
 </div>
 
@@ -107,6 +110,7 @@
    To add a topic: copy one block below and change label / feeds.
    NOTE: Google News RSS is not used any more - it answers HTTP 503 to Cloudflare Workers.
          BleepingComputer / Krebs answer HTTP 403 (bot protection), so they were replaced too.   */
+const GUARDIAN = "https://content.guardianapis.com/search?order-by=newest&page-size=40&api-key=test&tag=";
 const TOPICS = [
   {
     id: "ai", label: "AI", short: "AI",
@@ -118,24 +122,43 @@ const TOPICS = [
       { name: "MIT Tech Review", url: "https://www.technologyreview.com/topic/artificial-intelligence/feed" },
       { name: "Wired AI",        url: "https://www.wired.com/feed/tag/ai/latest/rss" },
       { name: "The Decoder",     url: "https://the-decoder.com/feed/" },
+      { name: "VentureBeat AI",  url: "https://venturebeat.com/category/ai/feed/" },
+      { name: "Hugging Face",    url: "https://huggingface.co/blog/feed.xml" },
+      { name: "Google DeepMind", url: "https://deepmind.google/blog/rss.xml" },
+      { name: "MarkTechPost",    url: "https://www.marktechpost.com/feed/" },
       { name: "IEEE Spectrum",   url: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss" },
       { name: "OpenAI",          url: "https://openai.com/news/rss.xml" },
       { name: "Google AI",       url: "https://blog.google/technology/ai/rss/" },
       { name: "NVIDIA Blog",     url: "https://blogs.nvidia.com/feed/", filter: true },
       { name: "AWS ML Blog",     url: "https://aws.amazon.com/blogs/machine-learning/feed/" },
       { name: "InfoQ AI/ML",     url: "https://feed.infoq.com/ai-ml-data-eng/" },
-      { name: "The Guardian AI", url: "https://www.theguardian.com/technology/artificialintelligenceai/rss" },
-      { name: "Hacker News AI",  url: "https://hnrss.org/newest?q=AI+OR+LLM+OR+OpenAI+OR+Anthropic+OR+GPT&points=100" }
+      { name: "The Guardian AI", url: "https://www.theguardian.com/technology/artificialintelligenceai/rss", api: { kind: "guardian", url: GUARDIAN + "technology/artificialintelligenceai" } },
+      { name: "Hacker News AI",  url: "https://hnrss.org/newest?q=AI+OR+LLM+OR+OpenAI+OR+Anthropic+OR+GPT&points=100", filter: true,
+        api: { kind: "hn", url: "https://hn.algolia.com/api/v1/search_by_date?tags=story&hitsPerPage=100&numericFilters=points%3E50&query=AI%20LLM%20OpenAI%20Anthropic%20GPT&optionalWords=AI%20LLM%20OpenAI%20Anthropic%20GPT" } }
     ]
   },
   {
     id: "robotics", label: "Robotics", short: "Robots",
-    re: /\b(robots?|robotics?|robotaxis?|humanoids?|drones?|autonomous|exoskeletons?|cobots?|boston dynamics|optimus|unitree|figure ai)\b/i,
+    re: /\b(robots?|robotics?|robotic|robotaxis?|humanoids?|drones?|autonomous|self-driving|driverless|waymo|exoskeletons?|cobots?|quadrupeds?|grippers?|manipulators?|embodied|physical ai|automation|automated|boston dynamics|optimus|unitree|figure ai|agility robotics|tesla bot)\b/i,
     feeds: [
       { name: "IEEE Robotics",    url: "https://spectrum.ieee.org/feeds/topic/robotics.rss" },
       { name: "The Robot Report", url: "https://www.therobotreport.com/feed/" },
       { name: "TechCrunch Robotics", url: "https://techcrunch.com/category/robotics/feed/" },
       { name: "Robohub",          url: "https://robohub.org/feed/" },
+      { name: "Hackaday",        url: "https://hackaday.com/feed/", filter: true },
+      { name: "New Atlas",       url: "https://newatlas.com/index.rss", filter: true },
+      { name: "Interesting Eng.", url: "https://interestingengineering.com/feed", filter: true },
+      { name: "Engadget",        url: "https://www.engadget.com/rss.xml", filter: true },
+      { name: "Hacker News Robots", url: "https://hnrss.org/newest?q=robot+OR+robotics+OR+humanoid&points=30", filter: true,
+        api: { kind: "hn", url: "https://hn.algolia.com/api/v1/search_by_date?tags=story&hitsPerPage=100&numericFilters=points%3E20&query=robot%20robotics%20humanoid%20drone%20robotaxi&optionalWords=robot%20robotics%20humanoid%20drone%20robotaxi" } },
+      { name: "Guardian Robots", url: "https://www.theguardian.com/technology/robots/rss", api: { kind: "guardian", url: GUARDIAN + "technology/robots" } },
+      { name: "ScienceDaily Robotics", url: "https://www.sciencedaily.com/rss/computers_math/robotics.xml" },
+      { name: "Robotics & Automation", url: "https://roboticsandautomationnews.com/feed/" },
+      { name: "DroneLife",       url: "https://dronelife.com/feed/" },
+      { name: "DroneDJ",         url: "https://dronedj.com/feed/" },
+      { name: "Singularity Hub", url: "https://singularityhub.com/feed/", filter: true },
+      { name: "Electrek",        url: "https://electrek.co/feed/", filter: true },
+      { name: "Gizmodo",         url: "https://gizmodo.com/feed", filter: true },
       { name: "TechXplore Robotics", url: "https://techxplore.com/rss-feed/robotics-news/" },
       { name: "Ars Technica",     url: "https://feeds.arstechnica.com/arstechnica/technology-lab", filter: true },
       { name: "Wired",            url: "https://www.wired.com/feed/rss", filter: true },
@@ -146,9 +169,13 @@ const TOPICS = [
     id: "climate", label: "Climate & Disasters", short: "Climate",
     re: /\b(climate|weather|wildfires?|floods?|flooding|hurricanes?|typhoons?|cyclones?|earthquakes?|tsunami|heat ?waves?|droughts?|storms?|tornado(es)?|volcano|emissions|global warming|sea level|el nino)\b/i,
     feeds: [
-      { name: "Guardian Climate", url: "https://www.theguardian.com/environment/climate-crisis/rss" },
-      { name: "Guardian Environment", url: "https://www.theguardian.com/environment/rss" },
+      { name: "Guardian Climate", url: "https://www.theguardian.com/environment/climate-crisis/rss", api: { kind: "guardian", url: GUARDIAN + "environment/climate-crisis" } },
+      { name: "Guardian Environment", url: "https://www.theguardian.com/environment/rss", api: { kind: "guardian", url: GUARDIAN + "environment/environment" } },
       { name: "Carbon Brief",     url: "https://www.carbonbrief.org/feed/" },
+      { name: "Grist",           url: "https://grist.org/feed/" },
+      { name: "Yale E360",       url: "https://e360.yale.edu/feed.xml" },
+      { name: "Climate Home News", url: "https://www.climatechangenews.com/feed/" },
+      { name: "GDACS Disasters", url: "https://www.gdacs.org/xml/rss.xml" },
       { name: "Inside Climate News", url: "https://insideclimatenews.org/feed/" },
       { name: "Phys.org Earth",   url: "https://phys.org/rss-feed/earth-news/" },
       { name: "NASA Earth Observatory", url: "https://earthobservatory.nasa.gov/feeds/earth-observatory.rss" },
@@ -167,6 +194,10 @@ const TOPICS = [
       { name: "NASA",            url: "https://www.nasa.gov/feed/" },
       { name: "Ars Technica Space", url: "https://arstechnica.com/space/feed/" },
       { name: "Universe Today",  url: "https://www.universetoday.com/feed" },
+      { name: "NASASpaceflight", url: "https://www.nasaspaceflight.com/feed/" },
+      { name: "Spaceflight Now", url: "https://spaceflightnow.com/feed/" },
+      { name: "Sky & Telescope", url: "https://skyandtelescope.org/feed/" },
+      { name: "ESA",             url: "https://www.esa.int/rssfeed/Our_Activities/Space_News" },
       { name: "Phys.org Astronomy", url: "https://phys.org/rss-feed/space-news/astronomy/" },
       { name: "Phys.org Planetary", url: "https://phys.org/rss-feed/space-news/planetary-sciences/" },
       { name: "NYT Space",       url: "https://rss.nytimes.com/services/xml/rss/nyt/Space.xml" }
@@ -174,10 +205,14 @@ const TOPICS = [
   },
   {
     id: "weapons", label: "Weapons", short: "Weapons",
-    re: /\b(missiles?|anti-?missile|counter-?missiles?|drones?|uavs?|uas|uncrewed|unmanned|counter-?drone|anti-?drone|c-?uas|loitering|swarms?|air[- ]defen[cs]e|missile[- ]defen[cs]e|golden dome|hypersonics?|interceptors?|radars?|warships?|fighter|fighters|stealth|bombers?|submarines?|torpedoes?|frigates?|destroyers?|artillery|howitzers?|himars|munitions?|warheads?|icbms?|ballistic|patriot|thaad|aegis|iron dome|s-[34]00|directed[- ]energy|laser weapons?|railguns?|f-\d+|b-\d+|collaborative combat|loyal wingman|space force|anti-?satellite|asat|tanks?|armou?red|autonomous weapons?|weapons?)\b/i,
+    re: /\b(missiles?|anti-?missile|counter-?missiles?|drones?|uavs?|uas|uncrewed|unmanned|counter-?drone|anti-?drone|c-?uas|loitering|swarms?|air[- ]defen[cs]e|missile[- ]defen[cs]e|golden dome|hypersonics?|interceptors?|radars?|warships?|fighter|fighters|stealth|bombers?|submarines?|torpedoes?|frigates?|destroyers?|artillery|howitzers?|himars|munitions?|warheads?|icbms?|ballistic|patriot|thaad|aegis|iron dome|s-[34]00|directed[- ]energy|laser weapons?|railguns?|f-\d+|b-\d+|collaborative combat|loyal wingman|space force|anti-?satellite|asat|tanks?|armou?red|autonomous weapons?|weapons?|military|militar(y|ies)|navy|naval|army|air force|marines?|pentagon|warfare|warfighters?|combat|aircraft|jets?|armed|arms|ammunition|nuclear|defen[cs]e (system|contract|department|budget)|battlefield|troops)\b/i,
     feeds: [
       { name: "The War Zone",     url: "https://www.twz.com/feed" },
       { name: "Naval News",       url: "https://www.navalnews.com/feed/" },
+      { name: "Militarnyi",      url: "https://militarnyi.com/en/feed/" },
+      { name: "Army Technology", url: "https://www.army-technology.com/feed/", filter: true },
+      { name: "Naval Technology", url: "https://www.naval-technology.com/feed/", filter: true },
+      { name: "Airforce Technology", url: "https://www.airforce-technology.com/feed/", filter: true },
       { name: "The Aviationist",  url: "https://theaviationist.com/feed/" },
       { name: "Defence Blog",     url: "https://defence-blog.com/feed/" },
       { name: "Breaking Defense", url: "https://breakingdefense.com/feed/", filter: true },
@@ -196,6 +231,10 @@ const TOPICS = [
       { name: "Nature",          url: "https://www.nature.com/nature.rss" },
       { name: "New Scientist",   url: "https://www.newscientist.com/feed/home/" },
       { name: "Quanta Magazine", url: "https://www.quantamagazine.org/feed/" },
+      { name: "Science (AAAS)",  url: "https://www.science.org/rss/news_current.xml" },
+      { name: "Live Science",    url: "https://www.livescience.com/feeds/all" },
+      { name: "EurekAlert",      url: "https://www.eurekalert.org/rss.xml" },
+      { name: "Scientific American", url: "http://rss.sciam.com/ScientificAmerican-Global" },
       { name: "Science News",    url: "https://www.sciencenews.org/feed" },
       { name: "Ars Technica Science", url: "https://arstechnica.com/science/feed/" }
     ]
@@ -206,8 +245,12 @@ const TOPICS = [
     feeds: [
       { name: "STAT News",       url: "https://www.statnews.com/feed/" },
       { name: "ScienceDaily Health", url: "https://www.sciencedaily.com/rss/health_medicine.xml" },
-      { name: "Guardian Health", url: "https://www.theguardian.com/society/health/rss" },
+      { name: "Guardian Health", url: "https://www.theguardian.com/society/health/rss", api: { kind: "guardian", url: GUARDIAN + "society/health" } },
       { name: "Medical Xpress",  url: "https://medicalxpress.com/rss-feed/" },
+      { name: "WHO News",        url: "https://www.who.int/rss-feeds/news-english.xml" },
+      { name: "Fierce Biotech",  url: "https://www.fiercebiotech.com/rss/xml" },
+      { name: "News-Medical",    url: "https://www.news-medical.net/syndication.axd?format=rss2" },
+      { name: "BBC Health",      url: "https://feeds.bbci.co.uk/news/health/rss.xml" },
       { name: "BioPharma Dive",  url: "https://www.biopharmadive.com/feeds/news/" },
       { name: "NPR Health",      url: "https://feeds.npr.org/1128/rss.xml" }
     ]
@@ -216,6 +259,7 @@ const TOPICS = [
 
 const DAYS = 7;
 const TIMEOUT_MS = 10000;
+const FEED_BUDGET_MS = 25000;   // max time spent on the RSS routes of one feed
 const STALE_MS = 15 * 60 * 1000;
 const CACHE_PREFIX = "news_cache_v2_";
 const LAST_TOPIC_KEY = "news_last_topic";
@@ -228,7 +272,8 @@ const WORKER_URL = "https://tiny-salad-c0b4.gasphc.workers.dev";
 const RSS2JSON_KEY = "";
 
 const WORKER = WORKER_URL.trim().replace(/\/+$/, "");
-const CONCURRENCY = WORKER ? 6 : 3;   // public proxies rate-limit hard, so be gentler without own worker
+const CONCURRENCY = WORKER ? 6 : 3;
+const BUILD = "build 7";   // public proxies rate-limit hard, so be gentler without own worker
 
 /* ---------- CORS routes ----------
    The page runs from a local file (origin "null"), so browsers block direct requests to most sites.
@@ -236,24 +281,24 @@ const CONCURRENCY = WORKER ? 6 : 3;   // public proxies rate-limit hard, so be g
    `skippable` routes are paused for 5 min after repeated failures with zero successes,
    so a dead proxy doesn't slow every feed down.                                                    */
 const ROUTES = [];
-if (WORKER) {
-  ROUTES.push({ id: "worker", make: u => WORKER + "/?url=" + encodeURIComponent(u) });
-  ROUTES.push({ id: "direct", make: u => u });   // instant CORS failure for most sites, but free for those that allow it
-} else {
-  ROUTES.push(
-    { id: "direct",    make: u => u },
-    { id: "corsproxy", skippable: true, make: u => "https://corsproxy.io/?url=" + encodeURIComponent(u) },
-    { id: "allorigins",skippable: true, make: u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u) },
-    { id: "codetabs",  skippable: true, make: u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u) }
-  );
-}
-const USE_RSS2JSON = !WORKER || !!RSS2JSON_KEY;   // rss2json without a key is rate-limited (HTTP 429), so only as a fallback
+if (WORKER) ROUTES.push({ id: "worker", make: u => WORKER + "/?url=" + encodeURIComponent(u) });
+ROUTES.push(
+  { id: "direct",     make: u => u },   // instant CORS failure for most sites, but free for those that allow it
+  { id: "corsproxy",  skippable: true, make: u => "https://corsproxy.io/?url=" + encodeURIComponent(u) },
+  { id: "corsproxy2", skippable: true, make: u => "https://corsproxy.io/?" + encodeURIComponent(u) },
+  { id: "allorigins", skippable: true, make: u => "https://api.allorigins.win/raw?url=" + encodeURIComponent(u) },
+  { id: "allorigins-json", skippable: true, make: u => "https://api.allorigins.win/get?url=" + encodeURIComponent(u), unwrap: j => j && j.contents },
+  { id: "codetabs",   skippable: true, make: u => "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u) },
+  { id: "cors-lol",   skippable: true, make: u => "https://api.cors.lol/?url=" + encodeURIComponent(u) },
+  { id: "thingproxy", skippable: true, make: u => "https://thingproxy.freeboard.io/fetch/" + u }
+);
+const USE_RSS2JSON = true;   // last-resort fallback is now always on, even with a worker
 const routeStats = {};
-[...ROUTES.map(r => r.id), "rss2json"].forEach(id => routeStats[id] = { ok: 0, fail: 0, until: 0 });
+[...ROUTES.map(r => r.id), "rss2json"].forEach(id => routeStats[id] = { ok: 0, fail: 0, until: 0, last: "" });
 
 function routePaused(id, skippable) { return skippable && Date.now() < routeStats[id].until; }
 function routeOk(id)   { const st = routeStats[id]; st.ok++; st.until = 0; }
-function routeFail(id) { const st = routeStats[id]; st.fail++; if (st.ok === 0 && st.fail >= 4) st.until = Date.now() + 5 * 60 * 1000; }
+function routeFail(id) { const st = routeStats[id]; st.fail++; if (st.ok === 0 && st.fail >= 12) st.until = Date.now() + 90 * 1000; }
 
 const $tabs = document.getElementById("tabs");
 const $list = document.getElementById("list");
@@ -281,12 +326,15 @@ function looksLikeFeed(text) {
 
 async function fetchFeedText(url) {
   const errs = [];
+  const t0 = Date.now();
   for (const route of ROUTES) {
-    if (routePaused(route.id, route.skippable)) { errs.push(route.id + ": paused"); continue; }
+    if (Date.now() - t0 > FEED_BUDGET_MS) { errs.push("time budget exceeded"); break; }
+    if (routePaused(route.id, route.skippable)) { errs.push(route.id + ": paused (" + (routeStats[route.id].last || "?") + ")"); continue; }
     try {
       const text = await withTimeout(async signal => {
         const res = await fetch(route.make(url), { signal });
         if (!res.ok) throw new Error("HTTP " + res.status);
+        if (route.unwrap) return route.unwrap(await res.json());
         return res.text();
       }, TIMEOUT_MS);
       if (!looksLikeFeed(text)) throw new Error("not a feed");
@@ -294,7 +342,9 @@ async function fetchFeedText(url) {
       return { text, errs };
     } catch (e) {
       routeFail(route.id);
-      errs.push(route.id + ": " + (e.name === "AbortError" ? "timeout" : (e.message === "Failed to fetch" ? "blocked/CORS" : e.message)));
+      const why = e.name === "AbortError" ? "timeout" : (e.message === "Failed to fetch" ? "blocked/CORS" : e.message);
+      routeStats[route.id].last = why;
+      errs.push(route.id + ": " + why);
     }
   }
   return { text: null, errs };
@@ -322,6 +372,29 @@ async function fetchViaRss2Json(url) {
   } catch (e) {
     routeFail("rss2json");
     return { items: null, err: "rss2json: " + (e.name === "AbortError" ? "timeout" : (e.message === "Failed to fetch" ? "blocked" : e.message)) };
+  }
+}
+
+/* Native JSON APIs that send "Access-Control-Allow-Origin: *": work from ANY site (http or https) with no proxy.
+   feed.api = { kind, url }.  Tried when RSS routes fail.                                                      */
+function apiParse(kind, data, feed) {
+  if (kind === "hn") return (data.hits || []).filter(h => h.title).map(h => ({
+    title: h.title, url: h.url || ("https://news.ycombinator.com/item?id=" + h.objectID),
+    date: new Date(h.created_at_i * 1000), source: feed.name }));
+  if (kind === "guardian") return ((data.response && data.response.results) || []).map(r => ({
+    title: r.webTitle, url: r.webUrl, date: parseDate(r.webPublicationDate), source: feed.name }));
+  return [];
+}
+async function fetchViaApi(feed) {
+  try {
+    const data = await withTimeout(async signal => {
+      const res = await fetch(feed.api.url, { signal });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    }, TIMEOUT_MS);
+    return { items: apiParse(feed.api.kind, data, feed) };
+  } catch (e) {
+    return { items: null, err: "api: " + (e.name === "AbortError" ? "timeout" : (e.message === "Failed to fetch" ? "blocked" : e.message)) };
   }
 }
 
@@ -394,6 +467,10 @@ async function loadFeed(feed) {
     items = parseFeed(text, feed);
     if (!items) errs.push("parse error");
   }
+  if (!items && feed.api) {               // own-API route first: no proxy, no rate limit worries
+    const a = await fetchViaApi(feed);
+    if (a.items) { items = a.items; items.skipped = 0; } else errs.push(a.err);
+  }
   if (!items && USE_RSS2JSON) {
     const alt = await fetchViaRss2Json(feed.url);
     if (alt.items) items = alt.items.map(i => ({ ...i, source: feed.name }));
@@ -457,7 +534,7 @@ async function loadTopic(topic) {
     st.message = "";
     saveCache(topic);
   } else if (!firstLoad) {
-    st.message = "Could not refresh” showing previously loaded news.";
+    st.message = "Could not refresh - showing previously loaded news.";
   } else {
     const cached = loadCache(topic);
     if (cached.length) {
@@ -515,8 +592,8 @@ function dayLabel(d) {
   const day = new Date(d); day.setHours(0, 0, 0, 0);
   const diff = Math.round((today - day) / 86400000);
   const full = d.toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
-  if (diff === 0) return "Today" + full;
-  if (diff === 1) return "Yesterday" + full;
+  if (diff === 0) return "Today - " + full;
+  if (diff === 1) return "Yesterday - " + full;
   return full;
 }
 
@@ -554,7 +631,8 @@ function updateUI() {
       $sources.innerHTML = "Sources: " + st.results.slice()
         .sort((a, b) => a.feed.name.localeCompare(b.feed.name))
         .map(r => `<span>${esc(r.feed.name)} <b class="${r.ok ? "ok" : "fail"}">${r.ok ? r.added : "failed"}</b></span>`)
-        .join(" - ") + ` &nbsp;(${okCount}/${st.results.length} reachable)` + diag;
+        .join(" - ") + ` &nbsp;(${okCount}/${st.results.length} reachable)` + diag
+        + `<div class="diag">${BUILD} | routes: ${ROUTES.map(r => r.id).join(", ")} | ${location.origin}</div>`;
     } else {
       $sources.innerHTML = "";
     }
@@ -588,7 +666,7 @@ function renderList() {
     const pending = TOPICS.filter(t => t.state.loading || !t.state.loadedAt).map(t => t.short || t.label);
     info = (list.length ? "Found " + list.length + " across all topics"
                         : (pending.length ? "No matches yet" : "Nothing found in any topic"))
-         + (pending.length ? " still loading: " + pending.join(", ") : "");
+         + (pending.length ? " - still loading: " + pending.join(", ") : "");
   } else {
     list = current.state.articles.slice();
   }
@@ -673,7 +751,10 @@ function selectTopic(topic) {
 /* ---------- start ---------- */
 $search.addEventListener("input", updateUI);
 $search.addEventListener("focus", refreshStale);   // make sure every topic is loaded and fresh before searching
-setInterval(() => { if (!current.state.loading) loadTopic(current); }, STALE_MS); // auto-refresh current topic
+setInterval(() => { if (!document.hidden && !current.state.loading) loadTopic(current); }, STALE_MS); // auto-refresh current topic
+document.addEventListener("visibilitychange", () => {
+  if (!document.hidden && !current.state.loading && Date.now() - current.state.loadedAt > STALE_MS) loadTopic(current);
+});
 
 buildTabs();
 function syncHeader() { document.documentElement.style.setProperty("--hdr", $header.offsetHeight + "px"); }
