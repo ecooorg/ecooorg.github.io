@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Distributed Fault-Tolerant Ephemeris Synchronization (DFTES) for Autonomous Satellite Constellations</title>
+<meta name="description" content="Distributed Fault-Tolerant Ephemeris Synchronization (DFTES) for Autonomous Satellite Constellations. Volodymyr Kotegov, 2026.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>:root{--bg:#0b0f19;--text:#e2e8f0;--muted:#64748b;--accent:#38bdf8;--border:#1e293b;--hover:#131b2c;--panel:#111827;--soft:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+.container{max-width:860px;margin:0 auto;padding:14px}
+.back{display:inline-block;margin:10px 14px 2px 0;color:var(--muted);font-size:.85rem;text-decoration:none}
+.back:hover{color:var(--accent)}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 0;margin-bottom:6px;border-bottom:1px solid var(--border)}
+.pills{display:flex;gap:6px;align-items:center;padding-bottom:8px}
+.pill{font-family:inherit;line-height:1.2;background:var(--panel);border:1px solid var(--border);color:#cbd5e1;padding:6px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+.pill:hover{background:#1a2436}.pill.on{background:var(--accent);border-color:var(--accent);color:#04121c;font-weight:700}
+.pills .ttl{flex:1;min-width:0;color:var(--muted);font-size:.8rem;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.progress{height:2px;margin:0 -14px}.progress>div{height:100%;width:0;background:var(--accent)}
+#toc{position:absolute;left:0;right:0;top:100%;max-height:70vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-top:0;border-radius:0 0 8px 8px;padding:6px 10px 10px;font-size:.85rem}
+#toc[hidden]{display:none}
+#toc a{color:#cbd5e1;text-decoration:none;display:block;padding:3px 4px;border-radius:4px}
+#toc a:hover{background:var(--hover);color:#fff}
+#toc details{border-bottom:1px solid var(--border)}
+#toc summary{cursor:pointer;padding:4px;color:var(--text);font-weight:600;list-style:none;display:flex;gap:6px}
+#toc summary::before{content:"\25B8";color:var(--muted)}#toc details[open]>summary::before{content:"\25BE"}
+#toc summary a{display:inline;padding:0;font-weight:600}
+#toc .l3{padding-left:14px}#toc .l4{padding-left:28px;color:var(--soft)}
+.hero{padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.hero h1{font-size:1.7rem;line-height:1.2;color:#fff;letter-spacing:.01em}
+.hero .sub{color:var(--accent);font-size:1.02rem;margin-top:4px}
+.hero .tag{margin-top:8px;color:#fff;font-weight:700}
+.hero .note{color:var(--soft);font-size:.85rem;margin-top:6px}
+.meta{margin-top:10px;font-size:.8rem;color:var(--muted)}.meta div{padding:1px 0}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.links a{font-size:.75rem;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:2px 10px;text-decoration:none}
+.links a:hover{background:var(--hover)}
+h2,h3,h4,h5{scroll-margin-top:calc(var(--hdr,48px) + 8px);line-height:1.3}
+h2{font-size:1.2rem;color:var(--accent);margin:26px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+h3{font-size:1.04rem;color:#fff;margin:18px 0 5px}
+h4{font-size:.95rem;color:var(--accent);margin:14px 0 4px;font-weight:600}
+h5{font-size:.9rem;color:var(--soft);margin:10px 0 3px}
+p{margin:6px 0}
+b{color:#f1f5f9;font-weight:650}
+p a,li a,td a{color:var(--accent);text-decoration:none;word-break:break-all}p a:hover,li a:hover,td a:hover{text-decoration:underline}
+ul,ol{margin:5px 0 7px 1.25em}li{margin:2px 0}li>ul,li>ol{margin:2px 0 2px 1.1em}
+.ch{content-visibility:auto;contain-intrinsic-size:auto 1500px}
+.lead{color:#cbd5e1;font-size:1.02rem;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.ind{margin-left:1.2em;color:#cbd5e1}
+.box{margin-top:12px;padding:6px 10px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;font-weight:600;color:#fff}
+.co{--c:var(--accent);margin:10px 0;padding:6px 12px;background:color-mix(in srgb,var(--c) 8%,transparent);border-left:3px solid var(--c);border-radius:0 6px 6px 0}
+.co p{margin:4px 0}.co>p:first-child>b:first-child{color:var(--c)}.co .t{font-weight:700;color:var(--c)}
+.trainee{--c:#f59e0b}.trap{--c:#f87171}.stop{--c:#818cf8}.analysis{--c:#94a3b8}.idea{--c:#4ade80}.turn{--c:#c084fc}.key{--c:#38bdf8}
+.tw{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;line-height:1.4}
+table.wide{min-width:560px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th{background:var(--panel);color:var(--accent);font-weight:650}
+td+td,th+th{border-left:1px solid var(--border)}
+tbody tr:hover td{background:var(--hover)}
+footer{margin-top:28px;padding-top:10px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}
+footer a{color:var(--soft)}
+@media (max-width:600px){.hero h1{font-size:1.4rem}.pills .ttl{display:none}.container{padding:10px}}
+@media print{header,.back,#toc{display:none}body{background:#fff;color:#000}h2,h3,h4,.hero .sub,th{color:#000}.ch{content-visibility:visible}}.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin:6px 0;overflow-x:auto;white-space:pre-wrap}</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">&larr; ECO NGO</a><a class="back" href="publications.html">Publications</a>
+<header id="hdr"><div class="pills"><button class="pill" id="tbtn" type="button">Contents</button><a class="pill" href="#top">Top</a><span class="ttl">DFTES</span></div><div class="progress"><div id="bar"></div></div><nav id="toc" hidden></nav></header>
+<main id="top">
+<div class="hero"><h1>Distributed Fault-Tolerant Ephemeris Synchronization (DFTES) for Autonomous Satellite Constellations</h1><p class="note">autonomous navigation, satellite ephemeris, orbit determination, peer-to-peer mesh, fault tolerance, clock drift, covariance intersection, orbital mechanics, epistemic weighting</p><div class="meta"><div>TECHNICAL PREPRINT / DEFENSIVE PUBLICATION</div><div>Resource Type: Publication / Preprint</div><div>Intellectual Property Status: Public Domain Dedication (CC0 1.0 Universal)</div><div>Published: 22 August 2026</div></div><div class="links"><a href="https://doi.org/10.5281/zenodo.22056455" target="_blank" rel="noopener">Zenodo</a><a href="https://www.tdcommons.org/dpubs_series/11464/" target="_blank" rel="noopener">TDCommons</a></div></div><section class="ch"><h2>1. Abstract</h2><p>Large satellite constellations need continuous, high-precision knowledge of every node’s position and velocity to keep cross-links aligned and to perform collision-avoidance manoeuvres. Dependence on ground-based space situational awareness or GNSS creates a single point of failure that can be jammed, denied or simply out of contact.</p><p>This paper describes a fully decentralized software architecture that lets a constellation maintain a consistent ephemeris map using only inter-satellite links. Each satellite runs a local orbital propagator and keeps a state matrix for the whole constellation. When two nodes establish a link they exchange compact state vectors together with an explicit Epistemic Confidence Weight. The weight is computed from the age of the last absolute calibration, the local clock-drift estimate and the trace of the covariance matrix. Receiving nodes merge the incoming data with Covariance Intersection (including common variants of the algorithm). No master node or global lock is required; the collective map remains consistent with physical reality under partial connectivity.</p><p>The framework is intended for LEO mega-constellations, lunar or Martian orbital arrays, and any mission that must operate in contested or ground-denied environments.</p></section><section class="ch"><h2>2. Background</h2><p>As constellations grow to hundreds or thousands of satellites, frequent ground uploads of two-line elements or precise ephemerides become operationally expensive and fragile. Once a satellite loses contact with the ground, unmodeled drag, solar radiation pressure and higher-order gravity terms cause the on-board propagator to diverge within hours to days.</p><p>Relative ranging over inter-satellite links can constrain the formation, yet converting relative measurements into absolute orbits still needs a reference. Hierarchical schemes that designate a master satellite introduce a single point of failure: if that node is occulted, fails or is partitioned from the rest of the mesh, synchronization collapses.</p><p>A practical solution must therefore treat every node as equal, allow information to flow opportunistically across the mesh, and automatically discount stale or low-quality data.</p></section><section class="ch"><h2>3. Related Work</h2><p>Several lines of research address pieces of the problem:</p><p>Decentralized and federated extended Kalman filters have been applied to mega-constellation navigation.</p><p>Covariance Intersection and its common variants are standard tools for fusing estimates whose cross-correlations are unknown.</p><p>Autonomous orbit determination using inter-satellite ranging has been demonstrated on GNSS constellations.</p><p>Distributed time-synchronization protocols over optical or RF cross-links achieve nanosecond-level alignment.</p><p>Most of these approaches either retain a hierarchical structure, assume continuous absolute measurements, or do not explicitly decay the trustworthiness of an ephemeris sample with time and clock stability. The combination of a purely symmetric peer-to-peer mesh, an Epistemic Confidence Weight that incorporates telemetry age, oscillator drift and covariance magnitude, and non-divergent Covariance Intersection merges of absolute state vectors is, to the author’s knowledge, distinct.</p></section><section class="ch"><h2>4. Architecture</h2><p>DFTES runs as an application-layer process on every satellite’s on-board computer.</p><p>Local state matrix and propagation</p><p>Each node maintains a non-volatile table that stores, for every satellite in the constellation plan:</p><p>node identity,</p><p>epoch timestamp,</p><p>position and velocity vectors (Earth-centered inertial),</p><p>6 × 6 state-error covariance matrix P,</p><p>current Epistemic Confidence Weight We.</p><p>Between communication opportunities the node advances the entire table with a numerical propagator that includes a high-order gravity model, third-body perturbations and a nominal drag model. Propagation steps are performed at a fixed interval Δt_step (typically 1–10 s).</p><p>Epistemic Confidence Weight</p><p>The reliability of any stored state decays with time. Each node continuously evaluates</p><p>We(t) = exp(–α · τ) · 1 / (1 + β · δ_clock) · 1 / Tr(P)</p><p>where</p><p>τ is the time elapsed since the state was last tied to an absolute sensor (GNSS fix, ground upload or celestial reference),</p><p>δ_clock is the estimated fractional frequency offset of the local oscillator, scaled by the measured thermal environment,</p><p>Tr(P) is the trace of the covariance matrix,</p><p>α and β are constellation-specific positive constants.</p><p>A higher We indicates fresher, more trustworthy data.</p><p>Opportunistic exchange</p><p>When an optical or radio cross-link is established, the two nodes exchange a compact packet containing:</p><p>their own current state vector, covariance and We,</p><p>a small set of the highest-We states of other nodes they have recently heard from.</p><p>The packet is sized to fit inside ordinary link-keep-alive or heartbeat frames so that bandwidth overhead remains low.</p><p>Covariance Intersection merge</p><p>On receipt of a state for any satellite C the local node performs two checks:</p><p>If the incoming We is lower than the locally stored We, the packet is discarded.</p><p>If the incoming We is higher, the local and received estimates are fused by Covariance Intersection:</p><p>P_new⁻¹ = ω · P_local⁻¹ + (1 – ω) · P_received⁻¹</p><p>X_new = P_new · (ω · P_local⁻¹ · X_local + (1 – ω) · P_received⁻¹ · X_received)</p><p>The scalar ω ∈ [0, 1] is chosen by a closed-form approximation that minimises the trace or determinant of P_new. Because Covariance Intersection makes no assumption about cross-correlation, the update cannot become over-confident and remains non-divergent even when the same information circulates around network loops.</p><p>This disclosure covers standard Covariance Intersection as well as its Split, Inverse, Sequential and Ellipsoidal variants when applied to peer-to-peer ephemeris exchange. After the merge the local We for satellite C is updated to reflect the fused covariance and the age of the newer data.</p></section><section class="ch"><h2>5. Scope and Limitations</h2><p>DFTES is designed for:</p><p>LEO mega-constellations with dense cross-link meshes,</p><p>lunar or Martian orbital networks that lack a continuous GNSS equivalent,</p><p>military or civil assets that must continue operations when ground contact is denied.</p><p>The scheme assumes that each node has enough computing margin to propagate a few hundred state vectors and to perform occasional matrix operations of modest size. It tolerates temporary network partitions; when connectivity returns, higher-We states simply overwrite older ones. Relative navigation filters may still run in parallel for formation flying and can optionally raise or lower the Epistemic Weight of absolute states.</p></section><section class="ch"><h2>6. Implementation Notes</h2><p>Position, velocity and covariance elements should be stored in identical fixed-point formats (for example Q32.32 or Q64.64) on every satellite so that numerical propagation remains bit-identical across heterogeneous processors.</p><p>The optimisation of ω can be performed with a simple algebraic approximation rather than an iterative search.</p><p>Absolute calibration events (GNSS lock, ground ephemeris upload, or pulsar/star-tracker fixes) reset τ to zero and restore a high We.</p><p>The size of the state matrix can be limited to the satellites that lie inside a configurable communication diameter, reducing memory and propagation cost for very large constellations. The resulting sub-clusters may be static or updated dynamically according to link availability.</p></section><section class="ch"><h2>7. Public Domain Dedication</h2><p>I place this entire architecture—the local state-matrix propagation, the Epistemic Confidence Weight derived from telemetry age, clock drift and covariance magnitude, the opportunistic peer-to-peer exchange of weighted ephemeris packets, the non-divergent Covariance Intersection merge (including its common variants), the optional limitation of the state matrix by communication diameter, and all straightforward variations of them—into the public domain under the Creative Commons Zero (CC0 1.0) dedication.</p><p>This document is intended to serve as prior art. No one may obtain a patent on the core ideas described here: maintaining a constellation-wide ephemeris map by purely symmetric peer-to-peer exchange without a master node, attaching an explicit age-and-clock-decayed confidence weight to each state vector, or fusing overlapping orbital estimates with Covariance Intersection (or its common variants) so that the collective map remains consistent under partial connectivity and unknown cross-correlations.</p><p>Anyone is free to implement, modify, or use this approach for any purpose, including commercial and governmental applications, completely royalty-free and without any restrictions.</p><p>Author</p><p>Volodymyr Kotegov</p><p>volodymyr.kotegov@gmail.com</p></section>
+</main>
+<footer>&copy; 2026 Volodymyr Kotegov &middot; CC0 1.0 &middot; <a href="index.html">ECO NGO</a> &middot; <a href="publications.html">Publications</a></footer>
+</div>
+<script>(function(){var h=document.getElementById("hdr"),t=document.getElementById("toc"),b=document.getElementById("tbtn"),r=document.getElementById("bar"),d=document.documentElement,built=0;
+function s(){d.style.setProperty("--hdr",h.offsetHeight+"px")}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function build(){var hs=document.querySelectorAll("main h2,main h3,main h4"),front=[],g=[],n=0,c;
+hs.forEach(function(e){e.id="h"+(++n);if(e.tagName=="H2"){c={e:e,k:[]};g.push(c)}else if(c)c.k.push(e);else front.push(e)});
+function a(e){return '<a class="l'+e.tagName[1]+'" href="#'+e.id+'">'+esc(e.textContent)+'</a>'}
+var o="";if(front.length)o+="<details><summary>Front matter</summary>"+front.map(a).join("")+"</details>";
+g.forEach(function(x){o+='<details><summary><a href="#'+x.e.id+'">'+esc(x.e.textContent)+'</a></summary>'+x.k.map(a).join("")+"</details>"});
+t.innerHTML=o;built=1}
+b.onclick=function(){if(!built)build();t.hidden=!t.hidden;b.classList.toggle("on",!t.hidden)};
+t.onclick=function(e){if(e.target.closest("a")){t.hidden=true;b.classList.remove("on")}};
+addEventListener("scroll",function(){r.style.width=(100*scrollY/Math.max(1,d.scrollHeight-innerHeight))+"%"},{passive:true});
+addEventListener("resize",s);s()})();</script>
+</body>
+</html>

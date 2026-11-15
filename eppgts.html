@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eclipse-Phase Passive Preprocessing with Graphene Thermal Structures (EPP-GTS) for Low-Earth-Orbit Sensor Satellites</title>
+<meta name="description" content="Eclipse-Phase Passive Preprocessing with Graphene Thermal Structures (EPP-GTS) for Low-Earth-Orbit Sensor Satellites. Volodymyr Kotegov, 2026.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>:root{--bg:#0b0f19;--text:#e2e8f0;--muted:#64748b;--accent:#38bdf8;--border:#1e293b;--hover:#131b2c;--panel:#111827;--soft:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+.container{max-width:860px;margin:0 auto;padding:14px}
+.back{display:inline-block;margin:10px 14px 2px 0;color:var(--muted);font-size:.85rem;text-decoration:none}
+.back:hover{color:var(--accent)}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 0;margin-bottom:6px;border-bottom:1px solid var(--border)}
+.pills{display:flex;gap:6px;align-items:center;padding-bottom:8px}
+.pill{font-family:inherit;line-height:1.2;background:var(--panel);border:1px solid var(--border);color:#cbd5e1;padding:6px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+.pill:hover{background:#1a2436}.pill.on{background:var(--accent);border-color:var(--accent);color:#04121c;font-weight:700}
+.pills .ttl{flex:1;min-width:0;color:var(--muted);font-size:.8rem;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.progress{height:2px;margin:0 -14px}.progress>div{height:100%;width:0;background:var(--accent)}
+#toc{position:absolute;left:0;right:0;top:100%;max-height:70vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-top:0;border-radius:0 0 8px 8px;padding:6px 10px 10px;font-size:.85rem}
+#toc[hidden]{display:none}
+#toc a{color:#cbd5e1;text-decoration:none;display:block;padding:3px 4px;border-radius:4px}
+#toc a:hover{background:var(--hover);color:#fff}
+#toc details{border-bottom:1px solid var(--border)}
+#toc summary{cursor:pointer;padding:4px;color:var(--text);font-weight:600;list-style:none;display:flex;gap:6px}
+#toc summary::before{content:"\25B8";color:var(--muted)}#toc details[open]>summary::before{content:"\25BE"}
+#toc summary a{display:inline;padding:0;font-weight:600}
+#toc .l3{padding-left:14px}#toc .l4{padding-left:28px;color:var(--soft)}
+.hero{padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.hero h1{font-size:1.7rem;line-height:1.2;color:#fff;letter-spacing:.01em}
+.hero .sub{color:var(--accent);font-size:1.02rem;margin-top:4px}
+.hero .tag{margin-top:8px;color:#fff;font-weight:700}
+.hero .note{color:var(--soft);font-size:.85rem;margin-top:6px}
+.meta{margin-top:10px;font-size:.8rem;color:var(--muted)}.meta div{padding:1px 0}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.links a{font-size:.75rem;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:2px 10px;text-decoration:none}
+.links a:hover{background:var(--hover)}
+h2,h3,h4,h5{scroll-margin-top:calc(var(--hdr,48px) + 8px);line-height:1.3}
+h2{font-size:1.2rem;color:var(--accent);margin:26px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+h3{font-size:1.04rem;color:#fff;margin:18px 0 5px}
+h4{font-size:.95rem;color:var(--accent);margin:14px 0 4px;font-weight:600}
+h5{font-size:.9rem;color:var(--soft);margin:10px 0 3px}
+p{margin:6px 0}
+b{color:#f1f5f9;font-weight:650}
+p a,li a,td a{color:var(--accent);text-decoration:none;word-break:break-all}p a:hover,li a:hover,td a:hover{text-decoration:underline}
+ul,ol{margin:5px 0 7px 1.25em}li{margin:2px 0}li>ul,li>ol{margin:2px 0 2px 1.1em}
+.ch{content-visibility:auto;contain-intrinsic-size:auto 1500px}
+.lead{color:#cbd5e1;font-size:1.02rem;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.ind{margin-left:1.2em;color:#cbd5e1}
+.box{margin-top:12px;padding:6px 10px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;font-weight:600;color:#fff}
+.co{--c:var(--accent);margin:10px 0;padding:6px 12px;background:color-mix(in srgb,var(--c) 8%,transparent);border-left:3px solid var(--c);border-radius:0 6px 6px 0}
+.co p{margin:4px 0}.co>p:first-child>b:first-child{color:var(--c)}.co .t{font-weight:700;color:var(--c)}
+.trainee{--c:#f59e0b}.trap{--c:#f87171}.stop{--c:#818cf8}.analysis{--c:#94a3b8}.idea{--c:#4ade80}.turn{--c:#c084fc}.key{--c:#38bdf8}
+.tw{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;line-height:1.4}
+table.wide{min-width:560px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th{background:var(--panel);color:var(--accent);font-weight:650}
+td+td,th+th{border-left:1px solid var(--border)}
+tbody tr:hover td{background:var(--hover)}
+footer{margin-top:28px;padding-top:10px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}
+footer a{color:var(--soft)}
+@media (max-width:600px){.hero h1{font-size:1.4rem}.pills .ttl{display:none}.container{padding:10px}}
+@media print{header,.back,#toc{display:none}body{background:#fff;color:#000}h2,h3,h4,.hero .sub,th{color:#000}.ch{content-visibility:visible}}.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin:6px 0;overflow-x:auto;white-space:pre-wrap}</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">&larr; ECO NGO</a><a class="back" href="publications.html">Publications</a>
+<header id="hdr"><div class="pills"><button class="pill" id="tbtn" type="button">Contents</button><a class="pill" href="#top">Top</a><span class="ttl">EPP-GTS</span></div><div class="progress"><div id="bar"></div></div><nav id="toc" hidden></nav></header>
+<main id="top">
+<div class="hero"><h1>Eclipse-Phase Passive Preprocessing with Graphene Thermal Structures (EPP-GTS) for Low-Earth-Orbit Sensor Satellites</h1><p class="note">Keywords: low Earth orbit, sensor satellites, orbital eclipse, passive thermal management, graphene radiators, lithium iron phosphate, edge computing, high-emissivity structures</p><div class="meta"><div>TECHNICAL PREPRINT / DEFENSIVE PUBLICATION</div><div>Resource Type: Publication / Preprint</div><div>Intellectual Property Status: Public Domain Dedication (CC0 1.0 Universal)</div><div>Published: 22 August 2026</div></div><div class="links"><a href="https://doi.org/10.5281/zenodo.22056910" target="_blank" rel="noopener">Zenodo</a><a href="https://www.tdcommons.org/dpubs_series/11463/" target="_blank" rel="noopener">TDCommons</a></div></div><section class="ch"><h2>1. Abstract</h2><p>High-resolution Earth-observation satellites in low Earth orbit generate large raw data volumes that require substantial onboard computing for feature extraction, compression and filtering. Performing this work during the sunlit portion of the orbit adds heat and power load at the same time that solar arrays, sensors and transmitters are already active.</p><p>This paper describes a practical architecture that moves the heavy preprocessing entirely into the eclipse phase. Raw sensor data are buffered in non-volatile memory while the satellite is in sunlight. Once the spacecraft enters Earth’s shadow the compute cluster is powered from a dedicated lithium-iron-phosphate battery bank sized for cold, deep-cycle operation. Waste heat is conducted through high-conductivity graphite or graphene structures to deployable radiators whose surfaces are coated for high infrared emissivity. Because the radiators face deep space with no solar or albedo input, the temperature difference is large and passive radiation is efficient. The reduced data volume is then downlinked on subsequent sunlit passes. The approach lowers peak power and thermal demand on the primary bus and reduces the mass required for active cooling.</p></section><section class="ch"><h2>2. Background</h2><p>A typical low-Earth-orbit satellite spends roughly 60 % of each revolution in sunlight and 40 % in eclipse. Conventional designs try to acquire, process and downlink data during the sunlit interval. The result is simultaneous loading of the power system, the thermal control system and the payload.</p><p>To stay within temperature limits, designers either throttle the processors, reduce data rates, or add pumped fluid loops and heat pipes. These solutions increase mass and introduce mechanical failure modes. Common lithium-ion chemistries also prefer narrow temperature windows and suffer accelerated ageing under repeated high-rate discharges.</p><p>Treating the cold eclipse interval as the primary computational window removes the thermal stacking and allows simpler, lighter thermal hardware.</p></section><section class="ch"><h2>3. Related Work</h2><p>Existing practice generally keeps high-power processors powered down during eclipse and uses heaters to maintain instrument temperatures. Model-predictive controllers adjust duty cycles within the limits of conventional aluminium structures. Graphene and pyrolytic-graphite coatings or straps have already been demonstrated or flown to raise emissivity and conductivity of radiators and thermal links. Lithium-iron-phosphate cells have been shown in CubeSat tests to tolerate deeper discharges and lower temperatures than nickel-cobalt chemistries. Limited onboard processing during eclipse has been discussed, but usually without a dedicated cold-tolerant battery and a thermally isolated high-emissivity radiator path optimised for the shadow cone.</p><p>The combination of deliberate time-shifting of the full preprocessing workload into eclipse, a standalone high-current lithium-iron-phosphate bank, and a passive graphite/graphene thermal path that radiates only while the satellite is shielded from the Sun does not appear in the literature examined by the author.</p></section><section class="ch"><h2>4. Architecture</h2><p><b>Sunlit buffering<br></b>During daylight the optical, radar or hyperspectral payload writes raw data into radiation-tolerant non-volatile memory (NAND flash or MRAM). The high-performance compute cluster (FPGA, GPU or equivalent) remains in a deep-sleep state drawing less than 1 W.</p><p><b>Eclipse detection and activation<br></b>Eclipse entry is declared when solar-array voltage falls below a preset threshold or when the on-board orbit propagator and sun sensors confirm entry into the umbra. The state manager then brings the compute cluster to full power, drawing current from a dedicated lithium-iron-phosphate battery pack that is electrically and thermally isolated from the primary spacecraft battery. The pack is sized for the expected eclipse duration (typically 30–40 min) and can support deep discharge at temperatures down to approximately –20 °C without auxiliary heaters.</p><p><b>Passive thermal path<br></b>Heat from the processors is conducted through a structural backplane of highly oriented pyrolytic graphite or equivalent high-conductivity carbon material (in-plane conductivity typically &gt;1000 W m⁻¹ K⁻¹). The backplane is mounted on low-conductivity brackets so that heat does not flow back into the payload bay. The conduction path terminates in lightweight deployable radiator panels whose outer surfaces are coated with a high-emissivity graphene or carbon matrix (ε ≥ 0.95 in the far infrared). While the satellite is inside the Earth’s shadow the radiators face a background temperature near 3 K and reject heat by radiation alone.</p><p><b>Return to sunlight<br></b>At eclipse exit the compute cluster returns to sleep. The now-compressed data set is transferred to the downlink buffer and transmitted on subsequent ground passes, shortening the required transmitter on-time.</p></section><section class="ch"><h2>5. Scope and Limitations</h2><p>The architecture is intended for low-Earth-orbit sensor satellites (CubeSats to ESPA-class) that produce continuous high-rate imagery or signal data and that experience regular eclipses. It is not applicable to dawn-dusk sun-synchronous orbits that remain in continuous sunlight, nor to missions that must process and forward data with negligible latency.</p></section><section class="ch"><h2>6. Implementation Notes</h2><ul><li>The flight software checkpoints processing state at short intervals so that a transient power event does not corrupt the data set.</li><li>Graphene or carbon coatings on the radiators require an atomic-oxygen-resistant binder if the orbit is low enough for residual atmosphere.</li><li>The dedicated battery capacity is matched to the longest expected eclipse plus margin; it is never drawn below the level needed to protect the cells.</li><li>Thermal isolation between the compute/radiator assembly and the main payload bay is verified by analysis and thermal-vacuum test.</li></ul></section><section class="ch"><h2>7. Public Domain Dedication</h2><p>I place this entire architecture—the deliberate shifting of high-performance preprocessing into the orbital eclipse, the use of a dedicated cold-tolerant lithium-iron-phosphate battery bank, the passive high-conductivity graphite or graphene thermal path, the high-emissivity deployable radiators operated inside the Earth’s shadow, and all straightforward variations of them—into the public domain under the Creative Commons Zero (CC0 1.0) dedication.</p><p>This document is intended to serve as prior art. No one may obtain a patent on the core ideas described here: buffering raw sensor data during sunlight and performing the bulk of onboard processing only while the satellite is in eclipse, powering that processing from a standalone battery optimised for low-temperature deep discharge, or rejecting the resulting heat through high-emissivity carbon-based radiators that face deep space while shielded from solar flux.</p><p>Anyone is free to implement, modify, or use this approach for any purpose, including commercial and governmental applications, completely royalty-free and without any restrictions.</p><p>Author</p><p>Volodymyr Kotegov</p><p>volodymyr.kotegov@gmail.com</p></section>
+</main>
+<footer>&copy; 2026 Volodymyr Kotegov &middot; CC0 1.0 &middot; <a href="index.html">ECO NGO</a> &middot; <a href="publications.html">Publications</a></footer>
+</div>
+<script>(function(){var h=document.getElementById("hdr"),t=document.getElementById("toc"),b=document.getElementById("tbtn"),r=document.getElementById("bar"),d=document.documentElement,built=0;
+function s(){d.style.setProperty("--hdr",h.offsetHeight+"px")}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function build(){var hs=document.querySelectorAll("main h2,main h3,main h4"),front=[],g=[],n=0,c;
+hs.forEach(function(e){e.id="h"+(++n);if(e.tagName=="H2"){c={e:e,k:[]};g.push(c)}else if(c)c.k.push(e);else front.push(e)});
+function a(e){return '<a class="l'+e.tagName[1]+'" href="#'+e.id+'">'+esc(e.textContent)+'</a>'}
+var o="";if(front.length)o+="<details><summary>Front matter</summary>"+front.map(a).join("")+"</details>";
+g.forEach(function(x){o+='<details><summary><a href="#'+x.e.id+'">'+esc(x.e.textContent)+'</a></summary>'+x.k.map(a).join("")+"</details>"});
+t.innerHTML=o;built=1}
+b.onclick=function(){if(!built)build();t.hidden=!t.hidden;b.classList.toggle("on",!t.hidden)};
+t.onclick=function(e){if(e.target.closest("a")){t.hidden=true;b.classList.remove("on")}};
+addEventListener("scroll",function(){r.style.width=(100*scrollY/Math.max(1,d.scrollHeight-innerHeight))+"%"},{passive:true});
+addEventListener("resize",s);s()})();</script>
+</body>
+</html>

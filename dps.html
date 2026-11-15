@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Deterministic Predictive State (DPS) Architecture for High-Latency Interplanetary Command and Control</title>
+<meta name="description" content="Deterministic Predictive State (DPS) Architecture for High-Latency Interplanetary Command and Control. Volodymyr Kotegov, 2026.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>:root{--bg:#0b0f19;--text:#e2e8f0;--muted:#64748b;--accent:#38bdf8;--border:#1e293b;--hover:#131b2c;--panel:#111827;--soft:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+.container{max-width:860px;margin:0 auto;padding:14px}
+.back{display:inline-block;margin:10px 14px 2px 0;color:var(--muted);font-size:.85rem;text-decoration:none}
+.back:hover{color:var(--accent)}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 0;margin-bottom:6px;border-bottom:1px solid var(--border)}
+.pills{display:flex;gap:6px;align-items:center;padding-bottom:8px}
+.pill{font-family:inherit;line-height:1.2;background:var(--panel);border:1px solid var(--border);color:#cbd5e1;padding:6px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+.pill:hover{background:#1a2436}.pill.on{background:var(--accent);border-color:var(--accent);color:#04121c;font-weight:700}
+.pills .ttl{flex:1;min-width:0;color:var(--muted);font-size:.8rem;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.progress{height:2px;margin:0 -14px}.progress>div{height:100%;width:0;background:var(--accent)}
+#toc{position:absolute;left:0;right:0;top:100%;max-height:70vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-top:0;border-radius:0 0 8px 8px;padding:6px 10px 10px;font-size:.85rem}
+#toc[hidden]{display:none}
+#toc a{color:#cbd5e1;text-decoration:none;display:block;padding:3px 4px;border-radius:4px}
+#toc a:hover{background:var(--hover);color:#fff}
+#toc details{border-bottom:1px solid var(--border)}
+#toc summary{cursor:pointer;padding:4px;color:var(--text);font-weight:600;list-style:none;display:flex;gap:6px}
+#toc summary::before{content:"\25B8";color:var(--muted)}#toc details[open]>summary::before{content:"\25BE"}
+#toc summary a{display:inline;padding:0;font-weight:600}
+#toc .l3{padding-left:14px}#toc .l4{padding-left:28px;color:var(--soft)}
+.hero{padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.hero h1{font-size:1.7rem;line-height:1.2;color:#fff;letter-spacing:.01em}
+.hero .sub{color:var(--accent);font-size:1.02rem;margin-top:4px}
+.hero .tag{margin-top:8px;color:#fff;font-weight:700}
+.hero .note{color:var(--soft);font-size:.85rem;margin-top:6px}
+.meta{margin-top:10px;font-size:.8rem;color:var(--muted)}.meta div{padding:1px 0}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.links a{font-size:.75rem;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:2px 10px;text-decoration:none}
+.links a:hover{background:var(--hover)}
+h2,h3,h4,h5{scroll-margin-top:calc(var(--hdr,48px) + 8px);line-height:1.3}
+h2{font-size:1.2rem;color:var(--accent);margin:26px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+h3{font-size:1.04rem;color:#fff;margin:18px 0 5px}
+h4{font-size:.95rem;color:var(--accent);margin:14px 0 4px;font-weight:600}
+h5{font-size:.9rem;color:var(--soft);margin:10px 0 3px}
+p{margin:6px 0}
+b{color:#f1f5f9;font-weight:650}
+p a,li a,td a{color:var(--accent);text-decoration:none;word-break:break-all}p a:hover,li a:hover,td a:hover{text-decoration:underline}
+ul,ol{margin:5px 0 7px 1.25em}li{margin:2px 0}li>ul,li>ol{margin:2px 0 2px 1.1em}
+.ch{content-visibility:auto;contain-intrinsic-size:auto 1500px}
+.lead{color:#cbd5e1;font-size:1.02rem;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.ind{margin-left:1.2em;color:#cbd5e1}
+.box{margin-top:12px;padding:6px 10px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;font-weight:600;color:#fff}
+.co{--c:var(--accent);margin:10px 0;padding:6px 12px;background:color-mix(in srgb,var(--c) 8%,transparent);border-left:3px solid var(--c);border-radius:0 6px 6px 0}
+.co p{margin:4px 0}.co>p:first-child>b:first-child{color:var(--c)}.co .t{font-weight:700;color:var(--c)}
+.trainee{--c:#f59e0b}.trap{--c:#f87171}.stop{--c:#818cf8}.analysis{--c:#94a3b8}.idea{--c:#4ade80}.turn{--c:#c084fc}.key{--c:#38bdf8}
+.tw{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;line-height:1.4}
+table.wide{min-width:560px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th{background:var(--panel);color:var(--accent);font-weight:650}
+td+td,th+th{border-left:1px solid var(--border)}
+tbody tr:hover td{background:var(--hover)}
+footer{margin-top:28px;padding-top:10px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}
+footer a{color:var(--soft)}
+@media (max-width:600px){.hero h1{font-size:1.4rem}.pills .ttl{display:none}.container{padding:10px}}
+@media print{header,.back,#toc{display:none}body{background:#fff;color:#000}h2,h3,h4,.hero .sub,th{color:#000}.ch{content-visibility:visible}}.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin:6px 0;overflow-x:auto;white-space:pre-wrap}</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">&larr; ECO NGO</a><a class="back" href="publications.html">Publications</a>
+<header id="hdr"><div class="pills"><button class="pill" id="tbtn" type="button">Contents</button><a class="pill" href="#top">Top</a><span class="ttl">DPS Architecture</span></div><div class="progress"><div id="bar"></div></div><nav id="toc" hidden></nav></header>
+<main id="top">
+<div class="hero"><h1>Deterministic Predictive State (DPS) Architecture for High-Latency Interplanetary Command and Control</h1><p class="note">deterministic simulation, fixed-point arithmetic, delay-tolerant networking, CRDT, predictive state, interplanetary command and control, light-time delay, dual simulator</p><div class="meta"><div>TECHNICAL PREPRINT / DEFENSIVE PUBLICATION</div><div>Resource Type: Publication / Preprint</div><div>Intellectual Property Status: Public Domain Dedication (CC0 1.0 Universal)</div><div>Published: 22.08.2026</div><div>Author: Volodymyr Kotegov</div><div>Email: volodymyr.kotegov@gmail.com</div></div><div class="links"><a href="https://doi.org/10.5281/zenodo.22055509" target="_blank" rel="noopener">Zenodo</a><a href="https://www.tdcommons.org/dpubs_series/11466/" target="_blank" rel="noopener">TDCommons</a></div></div><section class="ch"><h2>1. Abstract</h2><p>Round-trip light-time delays between Earth and Mars routinely reach 20–40 minutes. Under these conditions conventional transactional databases and consensus protocols either lock up or time out.</p><p>This paper describes a practical architecture that avoids the problem by running identical, bit-for-bit deterministic simulators on the ground and on the spacecraft. All calculations use software fixed-point arithmetic. Both sides share the same atomic-clock timeline (corrected for relativity) and the same sequence of pseudorandom seeds. When delayed telemetry arrives via DTN, the ground side rewinds its state to the timestamp of the data, merges the real measurements with CRDTs, and fast-forwards the simulation back to the present. Operators therefore work with a continuously updated predictive view that converges to the true spacecraft state once the data catch up.</p><p>The method is restricted to fully deterministic workloads: trajectory propagation, attitude dynamics, power and thermal modelling, and resource scheduling.</p></section><section class="ch"><h2>2. Background</h2><p>Deep-space links are limited by the speed of light. A command sent to Mars takes several to more than twenty minutes to arrive; the reply takes the same time to return. Ground teams need an accurate picture of the vehicle before they uplink the next set of commands. Lock-based or consensus databases cannot operate under these delays. Purely asynchronous approaches leave operators looking at stale data and risk divergence between the ground model and the actual vehicle.</p><p>What is required is a live predictive model that remains consistent with reality once the delayed telemetry arrives.</p></section><section class="ch"><h2>3. Related Work</h2><p>Existing solutions fall into a few categories:</p><p>Delay/Disruption Tolerant Networking (DTN Bundle Protocol, LTP) solves reliable transport but does not address state consistency.</p><p>JPL’s Mission Data System and similar state-based architectures emphasise explicit state variables and models, yet still assume relatively short communication delays.</p><p>Model-predictive control is widely used for trajectory and attitude, but the prediction usually runs on one side only.</p><p>Deterministic lockstep simulation is common in multiplayer games and some multi-agent systems; shared PRNG seeds are a standard technique there.</p><p>Conflict-free replicated data types (CRDTs) provide eventual consistency in terrestrial distributed systems.</p><p>The combination described here—bit-identical fixed-point simulators on both ends of a high-latency link, timeline-indexed shared seeds for environmental noise, and a CRDT-based rewind-merge-fast-forward correction—does not appear in the literature the author has examined.</p></section><section class="ch"><h2>4. Architecture</h2><p>The system runs the same simulation code on the ground servers and on the flight computer.</p><p>Fixed-point arithmetic</p><p>Floating-point arithmetic is avoided. All calculations (orbital mechanics, attitude dynamics, power, thermal) use software fixed-point formats such as Q32.32 or Q64.64. Rounding mode, memory layout and overflow behaviour are defined identically on both platforms. This guarantees that the two simulators produce exactly the same bit patterns even when one side runs on x86 servers and the other on a radiation-hardened processor.</p><p>Shared timeline and random seeds</p><p>Both sides maintain a common time base derived from atomic clocks and corrected for relativistic effects (post-Newtonian terms or equivalent ephemeris data). A pre-agreed sequence of pseudorandom seeds is indexed by this timeline. When the simulation needs to model a semi-random physical effect (solar radiation pressure variations, thruster performance scatter, residual drag, etc.), both sides draw the same seed for that time step. No noise samples travel over the link.</p><p>A practical indexing scheme is:</p><p>seed(t) = hash(base_seed, floor(t / Δt))</p><p>or a simple sequential table loaded before launch.</p><p>Predictive horizon on the ground</p><p>The ground simulator runs continuously in real time. Controllers see and interact with a live predicted state. Commands can be tested against this prediction before uplink.</p><p>Telemetry transport</p><p>Sensor data and event logs travel via the DTN Bundle Protocol (or any equivalent delay-tolerant protocol). Each bundle carries a high-resolution timestamp of the moment the event occurred on the spacecraft.</p><p>Correction process</p><p>When a delayed bundle arrives the ground system performs the following steps:</p><p>Rewind the internal state to the exact timestamp of the bundle (or to the nearest earlier checkpoint if continuous state history is not kept).</p><p>Compute the difference between the earlier prediction and the actual measurements.</p><p>Merge the difference using commutative CRDT operations (G-Counters for cumulative quantities, OR-Sets for sets of events, LWW-registers for last-writer-wins values, etc.).</p><p>Fast-forward the simulation from the corrected point to the current wall-clock time, applying the same deterministic dynamics and the same seed sequence.</p><p>Update the operator displays with the corrected predictive state.</p><p>Because the underlying simulation is deterministic and the CRDT merges are commutative and associative, the final state remains consistent regardless of the order in which bundles arrive.</p><p>Out-of-order or missing bundles are handled naturally: a later bundle simply triggers another rewind-merge-fast-forward cycle. Partial data are merged as far as they go; the missing portions continue to be predicted until they arrive.</p></section><section class="ch"><h2>5. Scope and Limitations</h2><p>The architecture is deliberately limited to algorithmic, predictable subsystems:</p><p>n-body trajectory propagation and manoeuvre modelling</p><p>attitude determination and control</p><p>power system state-of-charge and load scheduling</p><p>thermal prediction of critical components</p><p>closed-loop environmental control</p><p>resource and memory scheduling</p><p>Non-deterministic or human-in-the-loop inputs (operator commands, unmodelled hardware failures, crew actions) enter the system through explicit injection points outside the core deterministic loop. Once injected, they become part of the shared history and are replayed identically on both sides.</p><p>The approach degrades gracefully when the physical model diverges too far from reality; the CRDT merge simply applies larger corrections. Extremely large state vectors may make frequent full rewinds expensive; in that case periodic checkpoints and incremental state deltas are used.</p></section><section class="ch"><h2>6. Implementation Notes</h2><p>The fast-forward step must run substantially faster than real time so that the predictive display remains responsive.</p><p>Checkpoint frequency is a trade-off between memory and rewind cost; typical values are every few seconds to every minute depending on state size.</p><p>Both sides must agree on the exact fixed-point library, hash function for seeds, and CRDT implementations before flight.</p></section><section class="ch"><h2>7. Public Domain Dedication</h2><p>I place this entire architecture—the dual fixed-point simulators, the shared timeline-indexed PRNG method, the rewind-merge-fast-forward correction process using CRDTs, and all straightforward variations of them—into the public domain under the Creative Commons Zero (CC0 1.0) dedication.</p><p>This document is intended to serve as prior art. No one may obtain a patent on the core ideas described here: running identical fixed-point simulators on both ends of a high-latency link, using shared seeds indexed by a common timeline to model environmental noise without transmitting it, or correcting a predictive state by rewinding, applying CRDT merges, and fast-forwarding when delayed DTN data arrive.</p><p>Anyone is free to implement, modify, or use this approach for any purpose, including commercial and governmental applications, completely royalty-free and without any restrictions.</p></section>
+</main>
+<footer>&copy; 2026 Volodymyr Kotegov &middot; CC0 1.0 &middot; <a href="index.html">ECO NGO</a> &middot; <a href="publications.html">Publications</a></footer>
+</div>
+<script>(function(){var h=document.getElementById("hdr"),t=document.getElementById("toc"),b=document.getElementById("tbtn"),r=document.getElementById("bar"),d=document.documentElement,built=0;
+function s(){d.style.setProperty("--hdr",h.offsetHeight+"px")}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function build(){var hs=document.querySelectorAll("main h2,main h3,main h4"),front=[],g=[],n=0,c;
+hs.forEach(function(e){e.id="h"+(++n);if(e.tagName=="H2"){c={e:e,k:[]};g.push(c)}else if(c)c.k.push(e);else front.push(e)});
+function a(e){return '<a class="l'+e.tagName[1]+'" href="#'+e.id+'">'+esc(e.textContent)+'</a>'}
+var o="";if(front.length)o+="<details><summary>Front matter</summary>"+front.map(a).join("")+"</details>";
+g.forEach(function(x){o+='<details><summary><a href="#'+x.e.id+'">'+esc(x.e.textContent)+'</a></summary>'+x.k.map(a).join("")+"</details>"});
+t.innerHTML=o;built=1}
+b.onclick=function(){if(!built)build();t.hidden=!t.hidden;b.classList.toggle("on",!t.hidden)};
+t.onclick=function(e){if(e.target.closest("a")){t.hidden=true;b.classList.remove("on")}};
+addEventListener("scroll",function(){r.style.width=(100*scrollY/Math.max(1,d.scrollHeight-innerHeight))+"%"},{passive:true});
+addEventListener("resize",s);s()})();</script>
+</body>
+</html>

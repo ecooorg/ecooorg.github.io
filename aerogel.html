@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Junction-Stabilized Graphene Aerogels for Cryogenic Insulation and Lightweight Radiation Shielding</title>
+<meta name="description" content="Junction-Stabilized Graphene Aerogels for Cryogenic Insulation and Lightweight Radiation Shielding. Volodymyr Kotegov, 2026.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>:root{--bg:#0b0f19;--text:#e2e8f0;--muted:#64748b;--accent:#38bdf8;--border:#1e293b;--hover:#131b2c;--panel:#111827;--soft:#94a3b8}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.5}
+.container{max-width:860px;margin:0 auto;padding:14px}
+.back{display:inline-block;margin:10px 14px 2px 0;color:var(--muted);font-size:.85rem;text-decoration:none}
+.back:hover{color:var(--accent)}
+header{position:sticky;top:0;z-index:5;background:var(--bg);padding:8px 0 0;margin-bottom:6px;border-bottom:1px solid var(--border)}
+.pills{display:flex;gap:6px;align-items:center;padding-bottom:8px}
+.pill{font-family:inherit;line-height:1.2;background:var(--panel);border:1px solid var(--border);color:#cbd5e1;padding:6px 14px;border-radius:999px;font-size:.85rem;cursor:pointer;text-decoration:none;white-space:nowrap}
+.pill:hover{background:#1a2436}.pill.on{background:var(--accent);border-color:var(--accent);color:#04121c;font-weight:700}
+.pills .ttl{flex:1;min-width:0;color:var(--muted);font-size:.8rem;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.progress{height:2px;margin:0 -14px}.progress>div{height:100%;width:0;background:var(--accent)}
+#toc{position:absolute;left:0;right:0;top:100%;max-height:70vh;overflow:auto;background:var(--panel);border:1px solid var(--border);border-top:0;border-radius:0 0 8px 8px;padding:6px 10px 10px;font-size:.85rem}
+#toc[hidden]{display:none}
+#toc a{color:#cbd5e1;text-decoration:none;display:block;padding:3px 4px;border-radius:4px}
+#toc a:hover{background:var(--hover);color:#fff}
+#toc details{border-bottom:1px solid var(--border)}
+#toc summary{cursor:pointer;padding:4px;color:var(--text);font-weight:600;list-style:none;display:flex;gap:6px}
+#toc summary::before{content:"\25B8";color:var(--muted)}#toc details[open]>summary::before{content:"\25BE"}
+#toc summary a{display:inline;padding:0;font-weight:600}
+#toc .l3{padding-left:14px}#toc .l4{padding-left:28px;color:var(--soft)}
+.hero{padding:14px 0 8px;border-bottom:1px solid var(--border);margin-bottom:6px}
+.hero h1{font-size:1.7rem;line-height:1.2;color:#fff;letter-spacing:.01em}
+.hero .sub{color:var(--accent);font-size:1.02rem;margin-top:4px}
+.hero .tag{margin-top:8px;color:#fff;font-weight:700}
+.hero .note{color:var(--soft);font-size:.85rem;margin-top:6px}
+.meta{margin-top:10px;font-size:.8rem;color:var(--muted)}.meta div{padding:1px 0}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}
+.links a{font-size:.75rem;color:var(--accent);border:1px solid var(--border);border-radius:999px;padding:2px 10px;text-decoration:none}
+.links a:hover{background:var(--hover)}
+h2,h3,h4,h5{scroll-margin-top:calc(var(--hdr,48px) + 8px);line-height:1.3}
+h2{font-size:1.2rem;color:var(--accent);margin:26px 0 8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+h3{font-size:1.04rem;color:#fff;margin:18px 0 5px}
+h4{font-size:.95rem;color:var(--accent);margin:14px 0 4px;font-weight:600}
+h5{font-size:.9rem;color:var(--soft);margin:10px 0 3px}
+p{margin:6px 0}
+b{color:#f1f5f9;font-weight:650}
+p a,li a,td a{color:var(--accent);text-decoration:none;word-break:break-all}p a:hover,li a:hover,td a:hover{text-decoration:underline}
+ul,ol{margin:5px 0 7px 1.25em}li{margin:2px 0}li>ul,li>ol{margin:2px 0 2px 1.1em}
+.ch{content-visibility:auto;contain-intrinsic-size:auto 1500px}
+.lead{color:#cbd5e1;font-size:1.02rem;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.ind{margin-left:1.2em;color:#cbd5e1}
+.box{margin-top:12px;padding:6px 10px;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:4px;font-weight:600;color:#fff}
+.co{--c:var(--accent);margin:10px 0;padding:6px 12px;background:color-mix(in srgb,var(--c) 8%,transparent);border-left:3px solid var(--c);border-radius:0 6px 6px 0}
+.co p{margin:4px 0}.co>p:first-child>b:first-child{color:var(--c)}.co .t{font-weight:700;color:var(--c)}
+.trainee{--c:#f59e0b}.trap{--c:#f87171}.stop{--c:#818cf8}.analysis{--c:#94a3b8}.idea{--c:#4ade80}.turn{--c:#c084fc}.key{--c:#38bdf8}
+.tw{overflow-x:auto;margin:10px 0;border:1px solid var(--border);border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:.82rem;line-height:1.4}
+table.wide{min-width:560px}
+th,td{padding:5px 9px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+tr:last-child td,tr:last-child th{border-bottom:0}
+th{background:var(--panel);color:var(--accent);font-weight:650}
+td+td,th+th{border-left:1px solid var(--border)}
+tbody tr:hover td{background:var(--hover)}
+footer{margin-top:28px;padding-top:10px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted)}
+footer a{color:var(--soft)}
+@media (max-width:600px){.hero h1{font-size:1.4rem}.pills .ttl{display:none}.container{padding:10px}}
+@media print{header,.back,#toc{display:none}body{background:#fff;color:#000}h2,h3,h4,.hero .sub,th{color:#000}.ch{content-visibility:visible}}.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem;background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:6px 10px;margin:6px 0;overflow-x:auto;white-space:pre-wrap}</style>
+</head>
+<body>
+<div class="container">
+<a class="back" href="index.html">&larr; ECO NGO</a><a class="back" href="publications.html">Publications</a>
+<header id="hdr"><div class="pills"><button class="pill" id="tbtn" type="button">Contents</button><a class="pill" href="#top">Top</a><span class="ttl">Graphene Aerogels</span></div><div class="progress"><div id="bar"></div></div><nav id="toc" hidden></nav></header>
+<main id="top">
+<div class="hero"><h1>Junction-Stabilized Graphene Aerogels for Cryogenic Insulation and Lightweight Radiation Shielding</h1><p class="note">Keywords: graphene aerogel, cryogenic insulation, deep space, nano-cluster stabilization, thermal conductivity, radiation shielding, liquid hydrogen, multi-functional materials</p><div class="meta"><div>TECHNICAL PREPRINT / DEFENSIVE PUBLICATION</div><div>Resource Type: Publication / Preprint</div><div>Intellectual Property Status: Public Domain Dedication (CC0 1.0 Universal)</div><div>Published: 22 August 2026</div></div><div class="links"><a href="https://doi.org/10.5281/zenodo.22057158" target="_blank" rel="noopener">Zenodo</a><a href="https://www.tdcommons.org/dpubs_series/11479/" target="_blank" rel="noopener">TDCommons</a></div></div><section class="ch"><h2>1. Abstract</h2><p>Long-duration deep-space missions and reusable cryogenic stages require insulation that remains dimensionally stable at liquid-hydrogen temperatures, adds very little mass, and provides at least modest attenuation of ionizing radiation. Conventional polymer foams become brittle and crack after repeated cryogenic cycling in vacuum. Multi-layer insulation is thermally efficient but offers almost no radiation protection and loses performance when compressed.</p><p>This paper describes a graphene aerogel whose open-cell network is locked at the sheet junctions by in-situ formed metallic nano-clusters. Two practical variants are defined: a lower-metal thermal-primary grade optimised for minimum conductivity and maximum recovery, and a higher-metal radiation-enhanced grade that trades a modest increase in density for improved secondary-radiation attenuation. An optional thin hermetic skin prevents gas and moisture ingress. The material is intended to be applied directly to tank walls or instrument enclosures as a compliant blanket.</p></section><section class="ch"><h2>2. Background</h2><p>Cryogenic tanks in space undergo large temperature swings, hard vacuum and continuous radiation exposure. When filled with liquid hydrogen the tank wall contracts sharply; any attached insulation must follow that movement without permanent collapse or large increase in heat leak. Standard foams out-gas and embrittle. Multi-layer insulation is sensitive to compression and contributes negligible shielding against galactic cosmic rays or solar particle events.</p><p>Unmodified graphene aerogels possess attractive density and conductivity, yet the cell walls are held mainly by weak van der Waals forces. Under repeated thermal cycling or launch vibration the sheets slide, the structure densifies and thermal performance degrades. Permanent locking of the junctions while preserving an open macropore network is therefore the central engineering requirement.</p></section><section class="ch"><h2>3. Related Work</h2><p>Graphene and graphene-oxide aerogels are well established. Metal particles or metal-oxide dopants have been added for radiation shielding, usually by mechanical mixing, which often creates stress concentrations. Chemical or nanotube cross-linking improves elasticity but does not simultaneously address cryogenic recovery and dual-Z radiation management. The combination of junction-specific metallic nano-clusters, controlled interwoven sheet architecture, a hermetic outer skin, and two deliberately differentiated density/metal-fraction grades does not appear in the literature examined by the author.</p></section><section class="ch"><h2>4. Architecture</h2><p><b>Network<br></b>Chemically modified graphene sheets form an isotropic three-dimensional network in which the majority of the void volume consists of macropores 10–50 µm across. The sheets are arranged so that they intersect and interweave rather than simply stack.</p><p><b>Junction stabilisation<br></b>During gelation, soluble precursors of tungsten, tantalum or similar refractory metals are introduced under conditions that favour precipitation at the sheet intersections. The resulting metallic nano-clusters (typical diameter 3–20 nm) act as permanent mechanical anchors. Two composition windows are defined:</p><ul><li>Thermal-primary grade: 5–8 % metal by mass, bulk density 4–8 mg cm⁻³</li><li>Radiation-enhanced grade: 10–15 % metal by mass, bulk density 8–12 mg cm⁻³</li></ul><p><b>Thermal and radiation functions<br></b>Solid conduction is limited by the long, tortuous path through the thin carbon walls. Radiative transfer is reduced by the high wall density and by absorption/scattering at the metallic clusters. An optional outer skin (thin polyimide, atomic-layer-deposited oxide or CVD carbon) maintains an internal micro-vacuum and excludes moisture. Primary cosmic-ray particles lose energy in the low-Z carbon matrix; secondary photons and electrons are attenuated by the high-Z clusters.</p><p><b>Mechanical behaviour<br></b>The locked junctions significantly improve dimensional recovery after repeated cycling between liquid-hydrogen temperature and ambient conditions and after exposure to typical launch vibration spectra.</p></section><section class="ch"><h2>5. Scope and Limitations</h2><p>The material is intended for external or internal insulation of liquid-hydrogen, liquid-oxygen and liquid-methane tanks, for thermal-radiation blankets around scientific instruments, and for lightweight habitat or electronics shielding layers.</p><p>It is not a primary load-bearing structure. Continuous service in oxidising atmospheres above approximately 400 °C requires additional protection. Achieving uniform junction-specific cluster placement and long-term hermeticity remain the principal manufacturing challenges.</p></section><section class="ch"><h2>6. Implementation Notes</h2><ul><li>Supercritical CO₂ drying is used to preserve the macropore network.</li><li>Reduction conditions are chosen so that the metal remains in metallic rather than oxide form.</li><li>A thin hermetic skin is applied after the aerogel is formed.</li><li>Each batch is characterised for density, cluster-size distribution, thermal conductivity at cryogenic temperature under vacuum, and recovery after thermal-vibration cycling.</li></ul></section><section class="ch"><h2>7. Public Domain Dedication</h2><p>I place this entire architecture—the graphene aerogel network stabilised by metallic nano-clusters located preferentially at the sheet junctions, the two defined composition and density grades, the optional hermetic skin, the combined cryogenic-insulation and radiation-attenuation function, and all straightforward variations of them—into the public domain under the Creative Commons Zero (CC0 1.0) dedication.</p><p>This document is intended to serve as prior art. No one may obtain a patent on the core ideas described here: locking a three-dimensional graphene aerogel against collapse by the preferential placement of metallic nano-clusters at sheet junctions, providing distinct thermal-primary and radiation-enhanced grades of such a material, or using the resulting low-density structure for simultaneous cryogenic thermal insulation and lightweight radiation shielding.</p><p>Anyone is free to implement, modify, or use this approach for any purpose, including commercial and governmental applications, completely royalty-free and without any restrictions.</p><p>Author</p><p>Volodymyr Kotegov</p><p>volodymyr.kotegov@gmail.com</p></section>
+</main>
+<footer>&copy; 2026 Volodymyr Kotegov &middot; CC0 1.0 &middot; <a href="index.html">ECO NGO</a> &middot; <a href="publications.html">Publications</a></footer>
+</div>
+<script>(function(){var h=document.getElementById("hdr"),t=document.getElementById("toc"),b=document.getElementById("tbtn"),r=document.getElementById("bar"),d=document.documentElement,built=0;
+function s(){d.style.setProperty("--hdr",h.offsetHeight+"px")}
+function esc(x){return x.replace(/&/g,"&amp;").replace(/</g,"&lt;")}
+function build(){var hs=document.querySelectorAll("main h2,main h3,main h4"),front=[],g=[],n=0,c;
+hs.forEach(function(e){e.id="h"+(++n);if(e.tagName=="H2"){c={e:e,k:[]};g.push(c)}else if(c)c.k.push(e);else front.push(e)});
+function a(e){return '<a class="l'+e.tagName[1]+'" href="#'+e.id+'">'+esc(e.textContent)+'</a>'}
+var o="";if(front.length)o+="<details><summary>Front matter</summary>"+front.map(a).join("")+"</details>";
+g.forEach(function(x){o+='<details><summary><a href="#'+x.e.id+'">'+esc(x.e.textContent)+'</a></summary>'+x.k.map(a).join("")+"</details>"});
+t.innerHTML=o;built=1}
+b.onclick=function(){if(!built)build();t.hidden=!t.hidden;b.classList.toggle("on",!t.hidden)};
+t.onclick=function(e){if(e.target.closest("a")){t.hidden=true;b.classList.remove("on")}};
+addEventListener("scroll",function(){r.style.width=(100*scrollY/Math.max(1,d.scrollHeight-innerHeight))+"%"},{passive:true});
+addEventListener("resize",s);s()})();</script>
+</body>
+</html>
