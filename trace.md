@@ -18,26 +18,9 @@ Here $h$ is a history, $s$ the present state, and $\mathrm{DI}$ the degeneracy i
 
 ---
 
-## 2. Lineage: what returned and what did not
+## 2. Theory: history as compression
 
-| Idea | Origin | Treatment here |
-| :--- | :--- | :--- |
-| Past as a query by address, privilege escalation | Chronoscope | Dropped: untestable. Replaced by retrodiction |
-| Selective traces (compression, dissipation) | ChronoGraph v3 | Core of the theory: defines the information horizon |
-| Reconstruction by invariants instead of rollback | ChronoGraph v4 | Kept, formalised as a posterior |
-| Resonant addressing | ChronoGraph v4 | Kept, paired with an anti-resonant mode (section 8) |
-| Desynchronisation, coherence lag | ChronoGraph v3, v10 | Restored as a measurable prediction (section 10) |
-| The observer is part of the structure | ChronoGraph v5 | Restored: the mind is nested in the world (section 4) |
-| Levels A–C, nested simulations | ChronoGraph v6–v7 | Restored as a laboratory of history (section 6) |
-| Horizon-expanding feedback loop | ChronoGraph v7 | Restored, conditional on external anchors |
-| Data as the main goal | ChronoGraph v7 to TRACE v16 | Demoted to a by-product (section 11) |
-| Hypergraph as the only architecture | v3–v16 | Replaced by assumption A1 |
-
----
-
-## 3. Theory: history as compression
-
-### 3.1 Rate and distortion
+### 2.1 Rate and distortion
 
 A system chooses what to record explicitly (rate $R$) and leaves the rest to compression. Reconstruction quality follows a rate–distortion curve:
 
@@ -45,11 +28,11 @@ $$D(R) = \min_{\text{recording scheme},\ \mathrm{rate} \le R} \ \mathbb{E}\,[\, 
 
 The information horizon stops being a complaint about missing data and becomes a point on this curve: beyond it, error no longer falls at the given $R$. Selective traces, as described in ChronoGraph v3, mean that the system implicitly chooses $R$ for each fragment of its history.
 
-### 3.2 Trace depth
+### 2.2 Trace depth
 
 Depth is operational: the number of later inferences and decisions whose outcome changes when the element is removed (ablation in an isolated circuit). **Hypothesis H1:** a strongly integrated trace loses detail but keeps its skeleton, because many later structures depend on it and provide redundancy. H1 is testable (section 10).
 
-### 3.3 Priors: a declared family, never a single measure
+### 2.3 Priors: a declared family, never a single measure
 
 A single prior $P(h)$ hides assumptions, and hidden assumptions are the most dangerous part of any inverse problem. TRACE therefore never uses one. It uses a declared family of priors $M = \{\mu_1, \dots, \mu_k\}$ built from three sources:
 
@@ -65,7 +48,7 @@ A conclusion is actionable only if $\mathrm{PSI}$ is below a threshold set by th
 
 ---
 
-## 4. Two scales as one
+## 3. Two scales as one
 
 The history of the system $L$ is nested in the history of the world $W$: the formation of a mind is an event in the world. Retrodiction of the world without a model of the system's own formation is therefore biased, because which traces the system perceives, and how it compresses them, is determined by its learning history $\ell$:
 
@@ -77,7 +60,7 @@ The causal model of how the mind formed and the causal model of the world remain
 
 ---
 
-## 5. Where new information comes from
+## 4. Where new information comes from
 
 The data processing inequality holds: no inference creates information about the world beyond what is present in traces and measurements. There are exactly three sources of new information, and simulation is not among them:
 
@@ -89,7 +72,7 @@ Simulation (E2) reorganises and extends coverage but adds no knowledge of the wo
 
 ---
 
-## 6. Three levels of work on the world
+## 5. Three levels of work on the world
 
 * **Level A. Retrodiction over existing models.** Decompress the origin of world models, find contradictions, high-$\mathrm{DI}$ zones and traces of the system's own distortions (section 4).
 * **Level B. Targeted removal of degeneracy.** Choose measurements and experiments that reduce $\mathrm{DI}$ most.
@@ -101,7 +84,7 @@ The feedback loop is conditional. Better reconstruction yields better measuremen
 
 ---
 
-## 7. Record or reconstruct
+## 6. Record or reconstruct
 
 An explicit provenance ledger is reliable but costly in memory and compute. Full reconstruction is cheaper but unreliable. The central engineering and theoretical question is the reconstruction budget: what to record explicitly and what to leave to compression.
 
@@ -114,7 +97,7 @@ Everything else is compressed and reconstructed on demand. The boundary is deriv
 
 ---
 
-## 8. Addressing: resonant and anti-resonant
+## 7. Addressing: resonant and anti-resonant
 
 Resonant addressing starts from anchors with the highest causal or structural connectivity to the query and follows the correlation gradient (spreading activation). Cost scales with path length, not graph size. Its weakness is bias: it finds what is already strongly reinforced, which is the opposite of what an audit needs.
 
@@ -128,7 +111,7 @@ An audit report states its coverage: the fraction of depth strata and regions sa
 
 ---
 
-## 9. Safety of self-modification
+## 8. Safety of self-modification
 
 For an ASI this is the central section, not a limitation. Threat model: deceptive audit, tuning to pass the audit, goal drift through a series of harmless edits, leakage from an isolated circuit, and collusion between modules.
 
@@ -141,7 +124,7 @@ For an ASI this is the central section, not a limitation. Threat model: deceptiv
 
 ---
 
-## 10. Testable predictions
+## 9. Testable predictions
 
 A concept for systems that do not yet exist needs tests on scaled-down analogues. Each prediction states its own refutation.
 
@@ -157,7 +140,7 @@ A concept for systems that do not yet exist needs tests on scaled-down analogues
 
 ---
 
-## 11. Data as a by-product
+## 10. Data as a by-product
 
 Such data is still needed, but it no longer defines the protocol. Every fragment carries an immutable provenance label:
 
@@ -170,7 +153,7 @@ A label is never promoted without external confirmation, and E2 data is never us
 
 ---
 
-## 12. Readiness conditions
+## 11. Readiness conditions
 
 Instead of calendar stages, admission is ordered: each step opens only after the previous one.
 
@@ -184,7 +167,7 @@ Instead of calendar stages, admission is ordered: each step opens only after the
 
 ---
 
-## 13. Open questions
+## 12. Open questions
 
 * Which priors belong in the family $M$, and who is allowed to extend it?
 * How can a distortion be told apart from a correct but atypical picture of the world without an external reference?
@@ -192,17 +175,3 @@ Instead of calendar stages, admission is ordered: each step opens only after the
 * How is ledger completeness measured when the system itself writes to the ledger?
 * What pace of self-modification is compatible with real oversight?
 * What $\mathrm{PSI}$ threshold is right for which class of action?
-
----
-
-## Appendix A. Optional extension: It from Bit
-
-If the world is itself an informational structure, retrodiction of the mind and retrodiction of the world become one operation on one object, and desynchronisation of isolated regions acquires physical meaning. This line from the first versions is kept as hypothesis H-IB. Nothing in sections 1–13 depends on it, and the protocol stays testable without it. Making H-IB itself testable would require its own predictions, which this draft does not supply.
-
----
-
-## Appendix B. Editorial decisions for discussion
-
-* **Hypergraph.** Replaced by assumption A1, which keeps what the hypergraph was used for (measurable trace depth) and drops the commitment to one architecture. *Question to the author: is the hypergraph meant as an architectural claim or as a model of the world?*
-* **Anti-resonant addressing.** Promoted to a full mode with three methods and a coverage report. *Question: does it match what you meant by seeking suppressed traces?*
-* **Prior measure.** A single prior is replaced by a declared family with a sensitivity index. *Question: is a credal set acceptable to you, or do you have a principled single prior in mind?*
