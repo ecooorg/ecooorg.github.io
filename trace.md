@@ -26,11 +26,11 @@ A system chooses what to record explicitly (rate $R$) and leaves the rest to com
 
 $$D(R) = \min_{\text{recording scheme},\ \mathrm{rate} \le R} \ \mathbb{E}\,[\, d(h, \hat h) \,]$$
 
-The information horizon stops being a complaint about missing data and becomes a point on this curve: beyond it, error no longer falls at the given $R$. Selective traces, as described in ChronoGraph v3, mean that the system implicitly chooses $R$ for each fragment of its history.
+The information horizon stops being a complaint about missing data and becomes a point on this curve: beyond it, error no longer falls at the given $R$. Selective traces, mean that the system implicitly chooses $R$ for each fragment of its history.
 
 ### 2.2 Trace depth
 
-Depth is operational: the number of later inferences and decisions whose outcome changes when the element is removed (ablation in an isolated circuit). **Hypothesis H1:** a strongly integrated trace loses detail but keeps its skeleton, because many later structures depend on it and provide redundancy. H1 is testable (section 10).
+Depth is operational: the number of later inferences and decisions whose outcome changes when the element is removed (ablation in an isolated circuit). **Hypothesis H1:** a strongly integrated trace loses detail but keeps its skeleton, because many later structures depend on it and provide redundancy. H1 is testable (section 9).
 
 ### 2.3 Priors: a declared family, never a single measure
 
@@ -44,7 +44,7 @@ Every inference is reported as a set. $\mathrm{DI}$ becomes an interval over $M$
 
 $$\mathrm{PSI}(s) = \max_{\mu, \mu' \in M} \; d_{TV}\big(P_\mu(h \mid s),\ P_{\mu'}(h \mid s)\big)$$
 
-A conclusion is actionable only if $\mathrm{PSI}$ is below a threshold set by the stakes of the action. Where $\mathrm{PSI}$ is high, the correct output is “undetermined by current traces”, and the system routes the question to targeted measurement (level B, section 6).
+A conclusion is actionable only if $\mathrm{PSI}$ is below a threshold set by the stakes of the action. Where $\mathrm{PSI}$ is high, the correct output is “undetermined by current traces”, and the system routes the question to targeted measurement (level B, section 5).
 
 ---
 
@@ -68,17 +68,17 @@ The data processing inequality holds: no inference creates information about the
 2. **Computation (E1).** In formal domains, knowledge arises from derivation and is checked by an independent verifier.
 3. **Targeted measurement (E0).** Level B chooses the experiment that reduces $\mathrm{DI}$ the most. This is optimal experimental design, not undirected data collection.
 
-Simulation (E2) reorganises and extends coverage but adds no knowledge of the world. Labels E0–E3 (section 11) are never promoted without external confirmation.
+Simulation (E2) reorganises and extends coverage but adds no knowledge of the world. Labels E0–E3 (section 10) are never promoted without external confirmation.
 
 ---
 
 ## 5. Three levels of work on the world
 
-* **Level A. Retrodiction over existing models.** Decompress the origin of world models, find contradictions, high-$\mathrm{DI}$ zones and traces of the system's own distortions (section 4).
+* **Level A. Retrodiction over existing models.** Decompress the origin of world models, find contradictions, high-$\mathrm{DI}$ zones and traces of the system's own distortions (section 3).
 * **Level B. Targeted removal of degeneracy.** Choose measurements and experiments that reduce $\mathrm{DI}$ most.
 * **Level C. Laboratory of history.** History happens once and cannot be rerun. TRACE therefore builds an ensemble of admissible reconstructions, weighted by the posterior, and tests which causal regularities hold across all of it. This is counterfactual science for macro-history, evolution, economics and cosmology.
 
-Every level-C simulation is nested in its parent process, so its results are accessible to the parent by construction. This resolves branch isolation without merging worlds: what is transferred is not states but compact, verifiable conclusions (section 9).
+Every level-C simulation is nested in its parent process, so its results are accessible to the parent by construction. This resolves branch isolation without merging worlds: what is transferred is not states but compact, verifiable conclusions (section 8).
 
 The feedback loop is conditional. Better reconstruction yields better measurement plans, these lower $\mathrm{DI}$, and that improves the level-C ensemble. While every cycle is anchored by new external measurements, the horizon expands. Without anchors the same loop amplifies its own errors, which is exactly the collapse the protocol exists to avoid.
 
